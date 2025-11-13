@@ -32,8 +32,57 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentContextNoteIndex = null;
   let currentEditingIndex = null;
   let pendingImportNotes = null;
+  let draggedIndex = null;
+  let draggedElement = null;
 
-  // Hàm áp dụng i18n cho text tĩnh trong DOM
+  // Simple Markdown parser
+  function parseMarkdown(text) {
+    let html = text;
+    
+    // Code blocks (must be before inline code)
+    html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+    
+    // Headers
+    html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+    html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+    html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+    
+    // Bold
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
+    
+    // Italic
+    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    html = html.replace(/_(.*?)_/g, '<em>$1</em>');
+    
+    // Inline code
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+    
+    // Links
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+    
+    // Blockquotes
+    html = html.replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
+    
+    // Horizontal rule
+    html = html.replace(/^---$/gm, '<hr>');
+    html = html.replace(/^\*\*\*$/gm, '<hr>');
+    
+    // Unordered lists
+    html = html.replace(/^\* (.+)$/gm, '<li>$1</li>');
+    html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+    html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+    
+    // Ordered lists
+    html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+    
+    // Line breaks
+    html = html.replace(/\n/g, '<br>');
+    
+    return html;
+  }
+
+  // Apply i18n for static text in DOM
   function applyI18n() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const msgName = el.getAttribute('data-i18n');
@@ -51,32 +100,55 @@ document.addEventListener('DOMContentLoaded', () => {
     replaceImportBtn.textContent = chrome.i18n.getMessage('replaceButton');
   }
 
+  // Toggle pin status
+  function togglePin(index) {
+    allNotes[index].pinned = !allNotes[index].pinned;
+    chrome.storage.local.set({ notes: allNotes }, () => {
+      renderNotes(allNotes);
+      showToast(allNotes[index].pinned ? '📌 Đã ghim!' : '📌 Đã bỏ ghim!');
+    });
+  }
+
+  // Sort notes: pinned first, then by custom order
+  function sortNotes(notes) {
+    const pinned = notes.filter(n => n.pinned);
+    const unpinned = notes.filter(n => !n.pinned);
+    return [...pinned, ...unpinned];
+  }
+
+  // Reorder notes after drag and drop
+  function reorderNotes(fromIndex, toIndex) {
+    if (fromIndex === toIndex) return;
+    
+    const [movedNote] = allNotes.splice(fromIndex, 1);
+    allNotes.splice(toIndex, 0, movedNote);
+    
+    chrome.storage.local.set({ notes: allNotes }, () => {
+      renderNotes(allNotes);
+      showToast('✅ Đã thay đổi vị trí!');
+    });
+  }
+
   // Render notes list
   function renderNotes(notes) {
-    allNotes = notes;
+    allNotes = sortNotes([...notes]);
     textNoteList.innerHTML = '';
     imageNoteList.innerHTML = '';
 
-    notes.forEach((note, index) => {
+    allNotes.forEach((note, index) => {
       const li = document.createElement('li');
-      li.classList.add('note-item', 'fade-in');
+      li.classList.add('note-item');
+      if (note.pinned) li.classList.add('pinned');
       li.dataset.index = index;
       li.dataset.type = note.text ? 'text' : 'image';
+      li.draggable = true;
 
       if (selectedNoteIndexes.has(index)) {
         li.classList.add('selected-multi');
-      } else {
-        li.classList.remove('selected-multi');
       }
 
       const content = document.createElement('div');
       content.className = 'note-content';
-
-      const timestampDiv = document.createElement('div');
-      timestampDiv.className = 'timestamp';
-      timestampDiv.innerHTML = `<span class="date">${note.time || ''}</span>`;
-
-      content.appendChild(timestampDiv);
 
       if (note.text) {
         if (currentEditingIndex === index) {
@@ -84,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           const textDiv = document.createElement('div');
           textDiv.className = 'text-content';
-          textDiv.innerHTML = note.text.replace(/\n/g, '<br>');
+          textDiv.innerHTML = parseMarkdown(note.text);
           content.appendChild(textDiv);
         }
         textNoteList.appendChild(li);
@@ -98,7 +170,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
       li.appendChild(content);
 
-      // Click trái toggle chọn nhiều ghi chú
+      // Drag and drop events
+      li.addEventListener('dragstart', (e) => {
+        if (currentEditingIndex !== null) {
+          e.preventDefault();
+          return;
+        }
+        draggedIndex = index;
+        draggedElement = li;
+        li.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+
+      li.addEventListener('dragend', (e) => {
+        li.classList.remove('dragging');
+        document.querySelectorAll('.note-item').forEach(item => {
+          item.classList.remove('drag-over');
+        });
+      });
+
+      li.addEventListener('dragover', (e) => {
+        if (currentEditingIndex !== null) return;
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        
+        if (draggedElement !== li) {
+          li.classList.add('drag-over');
+        }
+      });
+
+      li.addEventListener('dragleave', (e) => {
+        li.classList.remove('drag-over');
+      });
+
+      li.addEventListener('drop', (e) => {
+        e.preventDefault();
+        li.classList.remove('drag-over');
+        
+        if (draggedIndex !== null && draggedIndex !== index) {
+          reorderNotes(draggedIndex, index);
+        }
+        draggedIndex = null;
+        draggedElement = null;
+      });
+
+      // Left click toggles multi-select
       li.addEventListener('click', (e) => {
         if (currentEditingIndex !== null) return;
         e.preventDefault();
@@ -112,37 +228,52 @@ document.addEventListener('DOMContentLoaded', () => {
         hideContextMenu();
       });
 
-      // Chuột phải hiện menu
+      // Right click shows context menu
       li.addEventListener('contextmenu', (e) => {
-  e.preventDefault();
-  currentContextNoteIndex = index;
+        e.preventDefault();
+        currentContextNoteIndex = index;
 
-  // Kiểm tra nếu ghi chú không được chọn (chưa bôi xanh), không cho phép mở menu ngữ cảnh
-  if (!selectedNoteIndexes.has(index)) {
-    return; // Nếu ghi chú chưa được chọn, không thực hiện gì
-  }
+        // Only show context menu if note is selected
+        if (!selectedNoteIndexes.has(index)) {
+          return;
+        }
 
-  const isSelected = selectedNoteIndexes.has(index);
-
-  if (note.image) {
-    showImageContextMenu(e.pageX, e.pageY, index);
-  } else {
-    showTextContextMenu(e.pageX, e.pageY, isSelected);
-  }
-});
-
+        if (note.image) {
+          showImageContextMenu(e.pageX, e.pageY, index);
+        } else {
+          showTextContextMenu(e.pageX, e.pageY);
+        }
+      });
     });
   }
 
-  // Menu chuột phải cho ảnh (Xóa + Lưu ảnh)
+  // Context menu for images (Pin + Delete + Save image)
   function showImageContextMenu(x, y, index) {
     contextMenuList.innerHTML = '';
 
+    // Pin/Unpin
+    const pinLi = document.createElement('li');
+    const pinIcon = document.createElement('img');
+    pinIcon.className = 'context-menu-icon';
+    pinIcon.src = allNotes[index].pinned ? 'assets/unpin.png' : 'assets/pin.png';
+    pinLi.appendChild(pinIcon);
+    const pinText = document.createTextNode(allNotes[index].pinned ? 'Bỏ ghim' : 'Ghim');
+    pinLi.appendChild(pinText);
+    pinLi.addEventListener('click', () => {
+      togglePin(index);
+      hideContextMenu();
+    });
+
+    // Delete
     const deleteLi = document.createElement('li');
-    deleteLi.textContent = chrome.i18n.getMessage('deleteButton');
+    const deleteIcon = document.createElement('img');
+    deleteIcon.className = 'context-menu-icon';
+    deleteIcon.src = 'assets/delete.png';
+    deleteLi.appendChild(deleteIcon);
+    const deleteText = document.createTextNode(chrome.i18n.getMessage('deleteButton'));
+    deleteLi.appendChild(deleteText);
     deleteLi.addEventListener('click', () => {
       if (selectedNoteIndexes.size > 0 && selectedNoteIndexes.has(index)) {
-        // Xóa tất cả ảnh được chọn
         const indexesToDelete = Array.from(selectedNoteIndexes).sort((a, b) => b - a);
         indexesToDelete.forEach(idx => {
           allNotes.splice(idx, 1);
@@ -159,8 +290,14 @@ document.addEventListener('DOMContentLoaded', () => {
       hideContextMenu();
     });
 
+    // Save Image
     const saveLi = document.createElement('li');
-    saveLi.textContent = chrome.i18n.getMessage("saveImageOption"); // Thay thế bằng i18n
+    const saveIcon = document.createElement('img');
+    saveIcon.className = 'context-menu-icon';
+    saveIcon.src = 'assets/save.png';
+    saveLi.appendChild(saveIcon);
+    const saveText = document.createTextNode(chrome.i18n.getMessage("saveImageOption"));
+    saveLi.appendChild(saveText);
     saveLi.addEventListener('click', () => {
       const imgSrc = allNotes[index].image;
       if (imgSrc) {
@@ -170,63 +307,71 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        showToast(chrome.i18n.getMessage("imageSaveSuccess")); // Thay thế bằng i18n
+        showToast(chrome.i18n.getMessage("imageSaveSuccess"));
       }
       hideContextMenu();
     });
 
+    contextMenuList.appendChild(pinLi);
     contextMenuList.appendChild(deleteLi);
     contextMenuList.appendChild(saveLi);
 
-    customContextMenu.style.top = y + 'px';
-    customContextMenu.style.left = x + 'px';
-    customContextMenu.style.display = 'block';
-
-    const rect = customContextMenu.getBoundingClientRect();
-    const popupRect = document.body.getBoundingClientRect();
-    if (rect.right > popupRect.right) {
-      customContextMenu.style.left = (x - (rect.right - popupRect.right)) + 'px';
-    }
-    if (rect.bottom > popupRect.bottom) {
-      customContextMenu.style.top = (y - (rect.bottom - popupRect.bottom)) + 'px';
-    }
+    positionContextMenu(x, y);
   }
 
-  // Menu chuột phải cho text (tuỳ theo số ghi chú được chọn)
-  function showTextContextMenu(x, y, isSelected) {
+  // Context menu for text (depending on number of selected notes)
+  function showTextContextMenu(x, y) {
     contextMenuList.innerHTML = '';
+    const currentNote = allNotes[currentContextNoteIndex];
 
-    let options = [];
+    let menuItems = [];
 
     if (selectedNoteIndexes.size > 1) {
-      options = [chrome.i18n.getMessage('copyButton'), chrome.i18n.getMessage('deleteButton')];
-    } else if (selectedNoteIndexes.size === 1 && isSelected) {
-      options = [chrome.i18n.getMessage('copyButton'), chrome.i18n.getMessage('editButton'), chrome.i18n.getMessage('deleteButton')];
-    } else {
-      options = [chrome.i18n.getMessage('copyButton'), chrome.i18n.getMessage('editButton'), chrome.i18n.getMessage('deleteButton')];
+      menuItems = [
+        { icon: 'assets/copy.png', text: chrome.i18n.getMessage('copyButton'), action: 'copy' },
+        { icon: 'assets/delete.png', text: chrome.i18n.getMessage('deleteButton'), action: 'delete' }
+      ];
+    } else if (selectedNoteIndexes.size === 1) {
+      menuItems = [
+        { icon: currentNote.pinned ? 'assets/unpin.png' : 'assets/pin.png', text: currentNote.pinned ? 'Bỏ ghim' : 'Ghim', action: 'pin' },
+        { icon: 'assets/copy.png', text: chrome.i18n.getMessage('copyButton'), action: 'copy' },
+        { icon: 'assets/edit.png', text: chrome.i18n.getMessage('editButton'), action: 'edit' },
+        { icon: 'assets/delete.png', text: chrome.i18n.getMessage('deleteButton'), action: 'delete' }
+      ];
     }
 
-    options.forEach(option => {
+    menuItems.forEach(item => {
       const li = document.createElement('li');
-      li.textContent = option;
+      const icon = document.createElement('img');
+      icon.className = 'context-menu-icon';
+      icon.src = item.icon;
+      li.appendChild(icon);
+      const text = document.createTextNode(item.text);
+      li.appendChild(text);
       li.addEventListener('click', () => {
-        handleContextMenuOption(option);
+        handleContextMenuOption(item.action);
         hideContextMenu();
       });
       contextMenuList.appendChild(li);
     });
 
+    positionContextMenu(x, y);
+  }
+
+  // Position context menu with boundary detection
+  function positionContextMenu(x, y) {
     customContextMenu.style.top = y + 'px';
     customContextMenu.style.left = x + 'px';
     customContextMenu.style.display = 'block';
 
     const rect = customContextMenu.getBoundingClientRect();
     const popupRect = document.body.getBoundingClientRect();
+    
     if (rect.right > popupRect.right) {
-      customContextMenu.style.left = (x - (rect.right - popupRect.right)) + 'px';
+      customContextMenu.style.left = (x - (rect.right - popupRect.right) - 10) + 'px';
     }
     if (rect.bottom > popupRect.bottom) {
-      customContextMenu.style.top = (y - (rect.bottom - popupRect.bottom)) + 'px';
+      customContextMenu.style.top = (y - (rect.bottom - popupRect.bottom) - 10) + 'px';
     }
   }
 
@@ -234,11 +379,13 @@ document.addEventListener('DOMContentLoaded', () => {
     customContextMenu.style.display = 'none';
   }
 
-  // Xử lý menu chọn
+  // Handle context menu options
   function handleContextMenuOption(option) {
     if (currentContextNoteIndex === null) return;
 
-    if (option === chrome.i18n.getMessage('copyButton')) {
+    if (option === 'pin') {
+      togglePin(currentContextNoteIndex);
+    } else if (option === 'copy') {
       if (selectedNoteIndexes.size > 0 && selectedNoteIndexes.has(currentContextNoteIndex)) {
         const texts = [];
         selectedNoteIndexes.forEach(idx => {
@@ -261,10 +408,10 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
       }
-    } else if (option === chrome.i18n.getMessage('editButton')) {
+    } else if (option === 'edit') {
       currentEditingIndex = currentContextNoteIndex;
       renderNotes(allNotes);
-    } else if (option === chrome.i18n.getMessage('deleteButton')) {
+    } else if (option === 'delete') {
       if (selectedNoteIndexes.size > 0 && selectedNoteIndexes.has(currentContextNoteIndex)) {
         const indexesToDelete = Array.from(selectedNoteIndexes).sort((a,b) => b - a);
         indexesToDelete.forEach(idx => {
@@ -282,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Inline chỉnh sửa
+  // Inline editing
   function renderInlineEdit(text, container, index) {
     container.innerHTML = '';
     const textarea = document.createElement('textarea');
@@ -327,12 +474,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  // Modal xác nhận xóa
+  // Delete confirmation modal
   function openDeleteModal(index) {
     deleteModal.style.display = 'flex';
-
-    confirmDeleteBtn.textContent = chrome.i18n.getMessage('deleteButton');
-    cancelDeleteBtn.textContent = chrome.i18n.getMessage('cancelButton');
 
     confirmDeleteBtn.onclick = () => {
       allNotes.splice(index, 1);
@@ -350,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  // Toast hiển thị thông báo
+  // Toast notification
   let toastTimeout;
   function showToast(message) {
     toast.textContent = message;
@@ -361,12 +505,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1500);
   }
 
-  // Ẩn menu khi click ngoài
-  document.addEventListener('click', () => {
-    hideContextMenu();
+  // Hide menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!customContextMenu.contains(e.target)) {
+      hideContextMenu();
+    }
   });
 
-  // Chuyển tab văn bản/ảnh
+  // Tab switching
   textTabBtn.addEventListener('click', () => {
     textTabBtn.classList.add('active');
     imageTabBtn.classList.remove('active');
@@ -381,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
     textTab.classList.remove('active');
   });
 
-  // Tạo ghi chú mới
+  // Create new note
   createNoteBtn.addEventListener('click', () => {
     newNoteContainer.style.display = 'block';
     newNoteText.value = '';
@@ -393,7 +539,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (text) {
       const now = new Date();
       const formattedTime = now.toLocaleDateString('vi-VN') + ' [ ' + now.toLocaleTimeString('vi-VN') + ' ]';
-      allNotes.unshift({ text, time: formattedTime });
+      allNotes.unshift({ text, time: formattedTime, pinned: false });
       chrome.storage.local.set({ notes: allNotes }, () => {
         renderNotes(allNotes);
         newNoteText.value = '';
@@ -408,7 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
     newNoteContainer.style.display = 'none';
   });
 
-  // Xuất JSON
+  // Export JSON
   exportJsonBtn.addEventListener('click', () => {
     if (!allNotes.length) {
       alert(chrome.i18n.getMessage('jsonExportNoNotes'));
@@ -426,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
     URL.revokeObjectURL(url);
   });
 
-  // Import JSON với modal chọn thêm/thay thế
+  // Import JSON with modal for add/replace choice
   importJsonBtn.addEventListener('click', () => {
     fileInput.click();
   });
@@ -481,13 +627,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Khởi tạo dữ liệu và gọi i18n
+  // Initialize data and apply i18n
   chrome.storage.local.get({ notes: [] }, (data) => {
     renderNotes(data.notes);
     applyI18n();
   });
-
-  function hideContextMenu() {
-    customContextMenu.style.display = 'none';
-  }
 });

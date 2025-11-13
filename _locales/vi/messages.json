@@ -16,7 +16,7 @@
     "description": "Thông báo toast khi lưu ảnh thành công"
   },
   "savedNotes": {
-    "message": "📝 Ghi chú đã lưu",
+    "message": " Ghi chú đã lưu",
     "description": "Tiêu đề phần ghi chú đã lưu"
   },
   "createNoteButton": {

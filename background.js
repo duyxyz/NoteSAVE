@@ -1,13 +1,13 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "saveSelection",
-    title: "Lưu ghi chú (văn bản)", // Vẫn giữ nguyên vì bạn chưa yêu cầu
+    title: "Lưu ghi chú (văn bản)",
     contexts: ["selection"]
   });
 
   chrome.contextMenus.create({
     id: "saveImage",
-    title: chrome.i18n.getMessage("saveImageContextMenu"), // Thay thế bằng i18n
+    title: chrome.i18n.getMessage("saveImageContextMenu"),
     contexts: ["image"]
   });
 });
@@ -23,11 +23,11 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         chrome.storage.local.get({ notes: [] }, (data) => {
           const notes = data.notes;
           const now = new Date();
-          const date = now.toLocaleDateString('vi-VN'); // Định dạng ngày: 25/4/2025
-          const time = now.toLocaleTimeString('vi-VN'); // Định dạng giờ: 21:29:06
-          const formattedTime = `${date} [ ${time} ]`; // Định dạng: 25/4/2025 [ 21:29:06 ]
-          // Thêm ghi chú mới vào đầu mảng thay vì cuối
-          notes.unshift({ text: selectedText, time: formattedTime });
+          const date = now.toLocaleDateString('vi-VN');
+          const time = now.toLocaleTimeString('vi-VN');
+          const formattedTime = `${date} [ ${time} ]`;
+          // Thêm ghi chú mới với trạng thái pinned: false
+          notes.unshift({ text: selectedText, time: formattedTime, pinned: false });
           chrome.storage.local.set({ notes });
         });
       }
@@ -47,11 +47,11 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
             chrome.storage.local.get({ notes: [] }, (data) => {
               const notes = data.notes;
               const now = new Date();
-              const date = now.toLocaleDateString('vi-VN'); // Định dạng ngày: 25/4/2025
-              const time = now.toLocaleTimeString('vi-VN'); // Định dạng giờ: 21:29:06
-              const formattedTime = `${date} [ ${time} ]`; // Định dạng: 25/4/2025 [ 21:29:06 ]
-              // Thêm ghi chú mới vào đầu mảng thay vì cuối
-              notes.unshift({ image: base64data, time: formattedTime });
+              const date = now.toLocaleDateString('vi-VN');
+              const time = now.toLocaleTimeString('vi-VN');
+              const formattedTime = `${date} [ ${time} ]`;
+              // Thêm ghi chú ảnh với trạng thái pinned: false
+              notes.unshift({ image: base64data, time: formattedTime, pinned: false });
               chrome.storage.local.set({ notes });
             });
           };
