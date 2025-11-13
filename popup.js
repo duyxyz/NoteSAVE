@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     allNotes[index].pinned = !allNotes[index].pinned;
     chrome.storage.local.set({ notes: allNotes }, () => {
       renderNotes(allNotes);
-      showToast(allNotes[index].pinned ? '📌 Đã ghim!' : '📌 Đã bỏ ghim!');
+      showToast(allNotes[index].pinned ? ' Pinned' : 'Unpinned!');
     });
   }
 
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     chrome.storage.local.set({ notes: allNotes }, () => {
       renderNotes(allNotes);
-      showToast('✅ Đã thay đổi vị trí!');
+      showToast(' Position changed');
     });
   }
 
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pinIcon.className = 'context-menu-icon';
     pinIcon.src = allNotes[index].pinned ? 'assets/unpin.png' : 'assets/pin.png';
     pinLi.appendChild(pinIcon);
-    const pinText = document.createTextNode(allNotes[index].pinned ? 'Bỏ ghim' : 'Ghim');
+    const pinText = document.createTextNode(allNotes[index].pinned ? 'Unpin' : 'Pin');
     pinLi.appendChild(pinText);
     pinLi.addEventListener('click', () => {
       togglePin(index);
@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ];
     } else if (selectedNoteIndexes.size === 1) {
       menuItems = [
-        { icon: currentNote.pinned ? 'assets/unpin.png' : 'assets/pin.png', text: currentNote.pinned ? 'Bỏ ghim' : 'Ghim', action: 'pin' },
+        { icon: currentNote.pinned ? 'assets/unpin.png' : 'assets/pin.png', text: currentNote.pinned ? 'Unpin' : 'Pin', action: 'pin' },
         { icon: 'assets/copy.png', text: chrome.i18n.getMessage('copyButton'), action: 'copy' },
         { icon: 'assets/edit.png', text: chrome.i18n.getMessage('editButton'), action: 'edit' },
         { icon: 'assets/delete.png', text: chrome.i18n.getMessage('deleteButton'), action: 'delete' }
