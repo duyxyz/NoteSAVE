@@ -1,47 +1,43 @@
 {
   "appName": {
-    "message": "NoteSAVE",
+    "message": "Note36",
     "description": "Tên ứng dụng"
   },
   "saveImageContextMenu": {
-    "message": "Lưu ghi chú (ảnh)",
+    "message": "Lưu Ghi chú (Ảnh)",
     "description": "Tiêu đề menu ngữ cảnh để lưu ảnh"
   },
+  "saveSelectionContextMenu": {
+    "message": "Lưu Ghi chú (Văn bản)",
+    "description": "Tiêu đề menu ngữ cảnh để lưu vùng chọn văn bản"
+  },
   "saveImageOption": {
-    "message": "Lưu ảnh",
+    "message": "Lưu Ảnh",
     "description": "Tùy chọn menu ngữ cảnh để lưu ảnh"
   },
-  "imageSaveSuccess": {
-    "message": "Đã lưu ảnh!",
-    "description": "Thông báo toast khi lưu ảnh thành công"
-  },
-  "savedNotes": {
-    "message": " Ghi chú đã lưu",
-    "description": "Tiêu đề phần ghi chú đã lưu"
-  },
   "createNoteButton": {
-    "message": "Tạo ghi chú",
-    "description": "Nút tạo ghi chú mới"
+    "message": "Tạo Ghi chú",
+    "description": "Nút để tạo ghi chú mới"
   },
   "exportJsonButton": {
     "message": "Xuất JSON",
-    "description": "Nút xuất ghi chú ra JSON"
+    "description": "Nút để xuất ghi chú dưới dạng JSON"
   },
   "importJsonButton": {
     "message": "Nhập JSON",
-    "description": "Nút nhập ghi chú từ JSON"
+    "description": "Nút để nhập ghi chú từ JSON"
   },
   "newNotePlaceholder": {
-    "message": "Nhập ghi chú mới của bạn vào đây...",
-    "description": "Chữ mờ cho ô nhập ghi chú mới"
+    "message": "Nhập ghi chú mới của bạn tại đây...",
+    "description": "Placeholder cho textarea ghi chú mới"
   },
   "saveButton": {
     "message": "Lưu",
-    "description": "Nút lưu"
+    "description": "Văn bản nút Lưu"
   },
   "cancelButton": {
     "message": "Hủy",
-    "description": "Nút hủy"
+    "description": "Văn bản nút Hủy"
   },
   "textTab": {
     "message": "Văn bản",
@@ -53,70 +49,46 @@
   },
   "deleteButton": {
     "message": "Xóa",
-    "description": "Nút xóa"
+    "description": "Văn bản nút Xóa"
   },
   "deleteConfirm": {
     "message": "Bạn có chắc chắn muốn xóa ghi chú này không?",
-    "description": "Tin nhắn xác nhận xóa một ghi chú"
+    "description": "Thông báo xác nhận xóa ghi chú"
   },
   "copyButton": {
     "message": "Sao chép",
-    "description": "Nút sao chép"
+    "description": "Văn bản nút Sao chép"
   },
   "editButton": {
     "message": "Chỉnh sửa",
-    "description": "Nút chỉnh sửa"
-  },
-  "deleteSuccess": {
-    "message": "Đã xóa thành công!",
-    "description": "Thông báo xóa thành công"
-  },
-  "copySuccess": {
-    "message": "Đã sao chép!",
-    "description": "Thông báo sao chép thành công một ghi chú"
-  },
-  "copyMultiSuccess": {
-    "message": "Đã sao chép {num} ghi chú!",
-    "description": "Thông báo sao chép thành công nhiều ghi chú"
-  },
-  "noTextToCopy": {
-    "message": "Không có văn bản để sao chép.",
-    "description": "Thông báo khi không có văn bản để sao chép"
-  },
-  "saveSuccess": {
-    "message": "Đã lưu thành công!",
-    "description": "Thông báo lưu thành công"
-  },
-  "createSuccess": {
-    "message": "Đã tạo ghi chú!",
-    "description": "Thông báo tạo ghi chú mới thành công"
+    "description": "Văn bản nút Chỉnh sửa"
   },
   "jsonExportNoNotes": {
-    "message": "Không có ghi chú để xuất.",
-    "description": "Thông báo khi không có ghi chú để xuất JSON"
+    "message": "Không có ghi chú nào để xuất.",
+    "description": "Thông báo khi cố gắng xuất JSON mà không có ghi chú"
   },
   "jsonImportInvalidFile": {
     "message": "Định dạng tệp JSON không hợp lệ",
-    "description": "Thông báo lỗi khi tệp JSON nhập không hợp lệ"
+    "description": "Thông báo lỗi cho tệp JSON nhập không hợp lệ"
   },
   "importChoiceTitle": {
     "message": "Bạn muốn thêm hay thay thế nội dung?",
-    "description": "Câu hỏi lựa chọn khi nhập JSON"
+    "description": "Câu hỏi cho lựa chọn nhập"
   },
   "addButton": {
     "message": "Thêm",
-    "description": "Nút thêm trong modal lựa chọn nhập"
+    "description": "Văn bản nút Thêm trong modal lựa chọn nhập"
   },
   "replaceButton": {
     "message": "Thay thế",
-    "description": "Nút thay thế trong modal lựa chọn nhập"
+    "description": "Văn bản nút Thay thế trong modal lựa chọn nhập"
   },
-  "jsonImportAddSuccess": {
-    "message": "Đã thêm ghi chú thành công!",
-    "description": "Thông báo thêm ghi chú đã nhập thành công"
+  "pinButton": {
+    "message": "Ghim",
+    "description": "Tùy chọn menu ngữ cảnh để ghim ghi chú"
   },
-  "jsonImportReplaceSuccess": {
-    "message": "Đã thay thế ghi chú thành công!",
-    "description": "Thông báo thay thế ghi chú bằng ghi chú đã nhập thành công"
+  "unpinButton": {
+    "message": "Bỏ ghim",
+    "description": "Tùy chọn menu ngữ cảnh để bỏ ghim ghi chú"
   }
 }

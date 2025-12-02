@@ -1,0 +1,94 @@
+{
+  "appName": {
+    "message": "Note36",
+    "description": "应用程序名称"
+  },
+  "saveImageContextMenu": {
+    "message": "保存笔记 (图片)",
+    "description": "保存图片的上下文菜单标题"
+  },
+  "saveSelectionContextMenu": {
+    "message": "保存笔记 (文本)",
+    "description": "保存文本选择的上下文菜单标题"
+  },
+  "saveImageOption": {
+    "message": "保存图片",
+    "description": "保存图片的上下文菜单选项"
+  },
+  "createNoteButton": {
+    "message": "创建笔记",
+    "description": "创建新笔记的按钮"
+  },
+  "exportJsonButton": {
+    "message": "导出JSON",
+    "description": "将笔记导出为JSON的按钮"
+  },
+  "importJsonButton": {
+    "message": "导入JSON",
+    "description": "从JSON导入笔记的按钮"
+  },
+  "newNotePlaceholder": {
+    "message": "在此处输入您的新笔记...",
+    "description": "新笔记文本区域的占位符"
+  },
+  "saveButton": {
+    "message": "保存",
+    "description": "保存按钮文本"
+  },
+  "cancelButton": {
+    "message": "取消",
+    "description": "取消按钮文本"
+  },
+  "textTab": {
+    "message": "文本",
+    "description": "文本笔记选项卡标题"
+  },
+  "imageTab": {
+    "message": "图片",
+    "description": "图片笔记选项卡标题"
+  },
+  "deleteButton": {
+    "message": "删除",
+    "description": "删除按钮文本"
+  },
+  "deleteConfirm": {
+    "message": "您确定要删除此笔记吗？",
+    "description": "删除单个笔记的确认消息"
+  },
+  "copyButton": {
+    "message": "复制",
+    "description": "复制按钮文本"
+  },
+  "editButton": {
+    "message": "编辑",
+    "description": "编辑按钮文本"
+  },
+  "jsonExportNoNotes": {
+    "message": "没有可导出的笔记。",
+    "description": "尝试在没有笔记的情况下导出JSON时的消息"
+  },
+  "jsonImportInvalidFile": {
+    "message": "JSON文件格式无效",
+    "description": "JSON导入文件无效的错误消息"
+  },
+  "importChoiceTitle": {
+    "message": "您想添加还是替换内容？",
+    "description": "导入选择的提问"
+  },
+  "addButton": {
+    "message": "添加",
+    "description": "导入选择模态框中的添加按钮文本"
+  },
+  "replaceButton": {
+    "message": "替换",
+    "description": "导入选择模态框中的替换按钮文本"
+  },
+  "pinButton": {
+    "message": "置顶",
+    "description": "置顶笔记的上下文菜单选项"
+  },
+  "unpinButton": {
+    "message": "取消置顶",
+    "description": "取消置顶笔记的上下文菜单选项"
+  }
+}

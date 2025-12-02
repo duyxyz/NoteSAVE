@@ -1,0 +1,94 @@
+{
+  "appName": {
+    "message": "Note36",
+    "description": "앱 이름"
+  },
+  "saveImageContextMenu": {
+    "message": "노트 저장 (이미지)",
+    "description": "이미지 저장을 위한 컨텍스트 메뉴 제목"
+  },
+  "saveSelectionContextMenu": {
+    "message": "노트 저장 (텍스트)",
+    "description": "텍스트 선택 저장을 위한 컨텍스트 메뉴 제목"
+  },
+  "saveImageOption": {
+    "message": "이미지 저장",
+    "description": "이미지 저장을 위한 컨텍스트 메뉴 옵션"
+  },
+  "createNoteButton": {
+    "message": "노트 생성",
+    "description": "새 노트를 만들기 위한 버튼"
+  },
+  "exportJsonButton": {
+    "message": "JSON 내보내기",
+    "description": "노트를 JSON으로 내보내기 위한 버튼"
+  },
+  "importJsonButton": {
+    "message": "JSON 가져오기",
+    "description": "JSON에서 노트를 가져오기 위한 버튼"
+  },
+  "newNotePlaceholder": {
+    "message": "여기에 새 노트를 입력하세요...",
+    "description": "새 노트 텍스트 영역의 자리 표시자"
+  },
+  "saveButton": {
+    "message": "저장",
+    "description": "저장 버튼 텍스트"
+  },
+  "cancelButton": {
+    "message": "취소",
+    "description": "취소 버튼 텍스트"
+  },
+  "textTab": {
+    "message": "텍스트",
+    "description": "텍스트 노트 탭 제목"
+  },
+  "imageTab": {
+    "message": "이미지",
+    "description": "이미지 노트 탭 제목"
+  },
+  "deleteButton": {
+    "message": "삭제",
+    "description": "삭제 버튼 텍스트"
+  },
+  "deleteConfirm": {
+    "message": "이 노트를 삭제하시겠습니까?",
+    "description": "단일 노트 삭제에 대한 확인 메시지"
+  },
+  "copyButton": {
+    "message": "복사",
+    "description": "복사 버튼 텍스트"
+  },
+  "editButton": {
+    "message": "편집",
+    "description": "편집 버튼 텍스트"
+  },
+  "jsonExportNoNotes": {
+    "message": "내보낼 노트가 없습니다.",
+    "description": "노트 없이 JSON 내보내기를 시도할 때의 메시지"
+  },
+  "jsonImportInvalidFile": {
+    "message": "잘못된 JSON 파일 형식",
+    "description": "잘못된 JSON 가져오기 파일에 대한 오류 메시지"
+  },
+  "importChoiceTitle": {
+    "message": "콘텐츠를 추가하거나 대체하시겠습니까?",
+    "description": "가져오기 선택에 대한 질문"
+  },
+  "addButton": {
+    "message": "추가",
+    "description": "가져오기 선택 모달의 추가 버튼 텍스트"
+  },
+  "replaceButton": {
+    "message": "대체",
+    "description": "가져오기 선택 모달의 대체 버튼 텍스트"
+  },
+  "pinButton": {
+    "message": "고정",
+    "description": "노트를 고정하기 위한 컨텍스트 메뉴 옵션"
+  },
+  "unpinButton": {
+    "message": "고정 해제",
+    "description": "노트 고정 해제를 위한 컨텍스트 메뉴 옵션"
+  }
+}

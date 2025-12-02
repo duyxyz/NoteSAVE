@@ -16,7 +16,6 @@
     </div>
   </div>
 
-  <!-- Khung nhập ghi chú mới -->
   <div class="new-note-container" id="newNoteContainer" style="display: none;">
     <textarea class="new-note-textarea" id="newNoteText" placeholder="" data-i18n-placeholder="newNotePlaceholder"></textarea>
     <div class="edit-button-container">
@@ -24,8 +23,6 @@
       <button class="cancel-button" id="cancelNewNoteBtn" data-i18n="cancelButton">Hủy</button>
     </div>
   </div>
-  <!-- End khung nhập ghi chú mới -->
-
   <div class="tabs-container">
     <div class="tab-buttons">
       <button class="tab-button active" id="textTabBtn" data-i18n="textTab">Văn bản</button>
@@ -41,15 +38,10 @@
     </div>
   </div>
 
-  <!-- Custom Context Menu -->
   <div id="customContextMenu" class="custom-context-menu" style="display:none;">
     <ul id="contextMenuList"></ul>
   </div>
 
-  <!-- Toast notification -->
-  <div id="toast" class="toast" style="display:none;">Đã sao chép!</div>
-
-  <!-- Modal xác nhận xóa với Glassmorphism -->
   <div class="modal" id="deleteModal" style="display: none;">
     <div class="modal-content">
       <p id="deleteMessage"></p>
@@ -59,8 +51,7 @@
       </div>
     </div>
   </div>
-  <!-- Modal chọn thêm hay thay thế khi nhập JSON -->
-<div class="modal" id="importChoiceModal" style="display: none;">
+  <div class="modal" id="importChoiceModal" style="display: none;">
   <div class="modal-content">
     <p>Bạn muốn thêm hay thay thế nội dung?</p>
     <div class="modal-buttons">
@@ -69,8 +60,6 @@
     </div>
   </div>
 </div>
-
-
 
   <script src="popup.js"></script>
 </body>

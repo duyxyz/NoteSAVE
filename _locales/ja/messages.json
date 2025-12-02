@@ -1,0 +1,94 @@
+{
+  "appName": {
+    "message": "Note36",
+    "description": "アプリケーション名"
+  },
+  "saveImageContextMenu": {
+    "message": "ノートを保存 (画像)",
+    "description": "画像を保存するためのコンテキストメニューのタイトル"
+  },
+  "saveSelectionContextMenu": {
+    "message": "ノートを保存 (テキスト)",
+    "description": "テキスト選択を保存するためのコンテキストメニューのタイトル"
+  },
+  "saveImageOption": {
+    "message": "画像を保存",
+    "description": "画像を保存するためのコンテキストメニューオプション"
+  },
+  "createNoteButton": {
+    "message": "ノートを作成",
+    "description": "新しいノートを作成するためのボタン"
+  },
+  "exportJsonButton": {
+    "message": "JSONをエクスポート",
+    "description": "ノートをJSONとしてエクスポートするためのボタン"
+  },
+  "importJsonButton": {
+    "message": "JSONをインポート",
+    "description": "JSONからノートをインポートするためのボタン"
+  },
+  "newNotePlaceholder": {
+    "message": "ここに新しいノートを入力...",
+    "description": "新しいノートのテキストエリアのプレースホルダー"
+  },
+  "saveButton": {
+    "message": "保存",
+    "description": "保存ボタンのテキスト"
+  },
+  "cancelButton": {
+    "message": "キャンセル",
+    "description": "キャンセルボタンのテキスト"
+  },
+  "textTab": {
+    "message": "テキスト",
+    "description": "テキストノートのタブタイトル"
+  },
+  "imageTab": {
+    "message": "画像",
+    "description": "画像ノートのタブタイトル"
+  },
+  "deleteButton": {
+    "message": "削除",
+    "description": "削除ボタンのテキスト"
+  },
+  "deleteConfirm": {
+    "message": "このノートを削除してもよろしいですか？",
+    "description": "単一ノートを削除するための確認メッセージ"
+  },
+  "copyButton": {
+    "message": "コピー",
+    "description": "コピーボタンのテキスト"
+  },
+  "editButton": {
+    "message": "編集",
+    "description": "編集ボタンのテキスト"
+  },
+  "jsonExportNoNotes": {
+    "message": "エクスポートするノートがありません。",
+    "description": "ノートなしでJSONエクスポートを試みたときのメッセージ"
+  },
+  "jsonImportInvalidFile": {
+    "message": "無効なJSONファイル形式",
+    "description": "無効なJSONインポートファイルのエラーメッセージ"
+  },
+  "importChoiceTitle": {
+    "message": "コンテンツを追加しますか、それとも置き換えますか？",
+    "description": "インポート選択のための質問"
+  },
+  "addButton": {
+    "message": "追加",
+    "description": "インポート選択モーダルでの追加ボタンのテキスト"
+  },
+  "replaceButton": {
+    "message": "置き換え",
+    "description": "インポート選択モーダルでの置き換えボタンのテキスト"
+  },
+  "pinButton": {
+    "message": "ピン留め",
+    "description": "ノートをピン留めするためのコンテキストメニューオプション"
+  },
+  "unpinButton": {
+    "message": "ピン留めを解除",
+    "description": "ノートのピン留めを解除するためのコンテキストメニューオプション"
+  }
+}

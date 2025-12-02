@@ -1,0 +1,94 @@
+{
+  "appName": {
+    "message": "Note36",
+    "description": "Nombre de la aplicación"
+  },
+  "saveImageContextMenu": {
+    "message": "Guardar nota (Imagen)",
+    "description": "Título del menú contextual para guardar una imagen"
+  },
+  "saveSelectionContextMenu": {
+    "message": "Guardar nota (Texto)",
+    "description": "Título del menú contextual para guardar la selección de texto"
+  },
+  "saveImageOption": {
+    "message": "Guardar imagen",
+    "description": "Opción del menú contextual para guardar una imagen"
+  },
+  "createNoteButton": {
+    "message": "Crear nota",
+    "description": "Botón para crear una nueva nota"
+  },
+  "exportJsonButton": {
+    "message": "Exportar JSON",
+    "description": "Botón para exportar notas como JSON"
+  },
+  "importJsonButton": {
+    "message": "Importar JSON",
+    "description": "Botón para importar notas desde JSON"
+  },
+  "newNotePlaceholder": {
+    "message": "Escriba su nueva nota aquí...",
+    "description": "Marcador de posición para el área de texto de la nueva nota"
+  },
+  "saveButton": {
+    "message": "Guardar",
+    "description": "Texto del botón Guardar"
+  },
+  "cancelButton": {
+    "message": "Cancelar",
+    "description": "Texto del botón Cancelar"
+  },
+  "textTab": {
+    "message": "Texto",
+    "description": "Título de la pestaña de notas de texto"
+  },
+  "imageTab": {
+    "message": "Imagen",
+    "description": "Título de la pestaña de notas de imagen"
+  },
+  "deleteButton": {
+    "message": "Eliminar",
+    "description": "Texto del botón Eliminar"
+  },
+  "deleteConfirm": {
+    "message": "¿Está seguro de que desea eliminar esta nota?",
+    "description": "Mensaje de confirmación para eliminar una sola nota"
+  },
+  "copyButton": {
+    "message": "Copiar",
+    "description": "Texto del botón Copiar"
+  },
+  "editButton": {
+    "message": "Editar",
+    "description": "Texto del botón Editar"
+  },
+  "jsonExportNoNotes": {
+    "message": "No hay notas para exportar.",
+    "description": "Mensaje al intentar exportar JSON sin notas"
+  },
+  "jsonImportInvalidFile": {
+    "message": "Formato de archivo JSON no válido",
+    "description": "Mensaje de error para archivo de importación JSON no válido"
+  },
+  "importChoiceTitle": {
+    "message": "¿Quiere añadir o reemplazar el contenido?",
+    "description": "Pregunta para la elección de importación"
+  },
+  "addButton": {
+    "message": "Añadir",
+    "description": "Texto del botón Añadir en el modal de elección de importación"
+  },
+  "replaceButton": {
+    "message": "Reemplazar",
+    "description": "Texto del botón Reemplazar en el modal de elección de importación"
+  },
+  "pinButton": {
+    "message": "Anclar",
+    "description": "Opción del menú contextual para anclar una nota"
+  },
+  "unpinButton": {
+    "message": "Desanclar",
+    "description": "Opción del menú contextual para desanclar una nota"
+  }
+}

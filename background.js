@@ -1,7 +1,8 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "saveSelection",
-    title: "Lưu ghi chú (văn bản)",
+    // Đã thay chuỗi cố định bằng lời gọi i18n
+    title: chrome.i18n.getMessage("saveSelectionContextMenu"), 
     contexts: ["selection"]
   });
 
@@ -61,22 +62,5 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
           console.error('Lỗi khi tải ảnh:', error);
         });
     }
-  }
-});
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === "fetchImage") {
-    fetch(request.url, { method: 'GET' })
-      .then(response => {
-        if (!response.ok) throw new Error('Phản hồi mạng không ổn');
-        return response.blob();
-      })
-      .then(blob => {
-        sendResponse({ blob });
-      })
-      .catch(error => {
-        sendResponse({ error: error.message });
-      });
-    return true;
   }
 });

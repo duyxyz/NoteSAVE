@@ -1,23 +1,19 @@
 {
   "appName": {
-    "message": "NoteSAVE",
+    "message": "Note36",
     "description": "Name of the application"
   },
   "saveImageContextMenu": {
     "message": "Save Note (Image)",
     "description": "Context menu title for saving an image"
   },
+  "saveSelectionContextMenu": {
+    "message": "Save Note (Text)",
+    "description": "Context menu title for saving text selection"
+  },
   "saveImageOption": {
     "message": "Save Image",
     "description": "Context menu option to save an image"
-  },
-  "imageSaveSuccess": {
-    "message": "Image saved!",
-    "description": "Toast message for successful image save"
-  },
-  "savedNotes": {
-    "message": "📝 Saved Notes",
-    "description": "Heading for saved notes section"
   },
   "createNoteButton": {
     "message": "Create Note",
@@ -67,30 +63,6 @@
     "message": "Edit",
     "description": "Edit button text"
   },
-  "deleteSuccess": {
-    "message": "Deleted successfully!",
-    "description": "Success message for deletion"
-  },
-  "copySuccess": {
-    "message": "Copied!",
-    "description": "Success message for single copy"
-  },
-  "copyMultiSuccess": {
-    "message": "Copied {num} notes!",
-    "description": "Success message for multi-copy"
-  },
-  "noTextToCopy": {
-    "message": "No text to copy.",
-    "description": "Message when there is no text to copy"
-  },
-  "saveSuccess": {
-    "message": "Saved successfully!",
-    "description": "Success message for saving"
-  },
-  "createSuccess": {
-    "message": "Note created!",
-    "description": "Success message for creating a new note"
-  },
   "jsonExportNoNotes": {
     "message": "No notes to export.",
     "description": "Message when trying to export JSON with no notes"
@@ -111,12 +83,12 @@
     "message": "Replace",
     "description": "Replace button text in import choice modal"
   },
-  "jsonImportAddSuccess": {
-    "message": "Notes added successfully!",
-    "description": "Success message for adding imported notes"
+  "pinButton": {
+    "message": "Pin",
+    "description": "Context menu option to pin a note"
   },
-  "jsonImportReplaceSuccess": {
-    "message": "Notes replaced successfully!",
-    "description": "Success message for replacing notes with imported notes"
+  "unpinButton": {
+    "message": "Unpin",
+    "description": "Context menu option to unpin a note"
   }
 }
