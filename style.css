@@ -1,18 +1,18 @@
-/* file: style.css - DEEP DARK / AMOLED MODE (ĐÃ FIX SCROLLBAR) */
+/* file: style.css - DEEP DARK / AMOLED MODE (ÄÃƒ FIX SCROLLBAR) */
 
-/* ----------- TỔNG THỂ POPUP - DEEP DARK MODE ----------- */
+/* ----------- Tá»"NG THá»‚ POPUP - DEEP DARK MODE ----------- */
 .popup-body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   padding: 0;
   width: 380px;
   min-width: 380px;
   max-width: 380px;
-  background: #000000; /* Nền chính - ĐEN SÂU */
+  background: #000000; /* Ná»n chÃ­nh - ÄEN SÃ‚U */
   margin: 0;
-  color: #f0f0f0; /* Chữ sáng hơn */
+  color: #f0f0f0; /* Chá»¯ sÃ¡ng hÆ¡n */
   box-sizing: border-box;
   
-  /* Flexbox để quản lý chiều cao */
+  /* Flexbox Ä'á»ƒ quáº£n lÃ½ chiá»u cao */
   display: flex; 
   flex-direction: column; 
 }
@@ -20,15 +20,15 @@
 h1 {
   font-size: 18px;
   margin: 0;
-  color: #ffffff; /* Chữ trắng */
+  color: #ffffff; /* Chá»¯ tráº¯ng */
   font-weight: 600;
 }
 
 /* ----------- HEADER ----------- */
 .header {
   padding: 10px;
-  border-bottom: 1px solid #303030; /* Viền tối */
-  background: #1a1a1a; /* Nền Header tối */
+  border-bottom: 1px solid #303030; /* Viá»n tá»'i */
+  background: #1a1a1a; /* Ná»n Header tá»'i */
   flex-shrink: 0; 
 }
 
@@ -40,9 +40,9 @@ h1 {
 }
 
 .create-note-button {
-  background-color: #242424; /* Nền nút tối */
-  color: #cccccc; /* Chữ sáng */
-  border: 1px solid #303030; /* Viền nút tối */
+  background-color: #242424; /* Ná»n nÃºt tá»'i */
+  color: #cccccc; /* Chá»¯ sÃ¡ng */
+  border: 1px solid #303030; /* Viá»n nÃºt tá»'i */
   padding: 7px 8px;
   border-radius: 4px;
   cursor: pointer;
@@ -58,7 +58,7 @@ h1 {
 }
 
 #createNoteBtn.create-note-button {
-  background-color: #1a354b; /* Nền xanh nhẹ tối */
+  background-color: #1a354b; /* Ná»n xanh nháº¹ tá»'i */
   color: #91d5ff; 
   border-color: #1890ff;
 }
@@ -67,12 +67,12 @@ h1 {
   background-color: #204768;
 }
 
-/* ----------- KHUNG TẠO MỚI (Mở rộng toàn bộ) ----------- */
+/* ----------- KHUNG Táº O Má»šI (Má»Ÿ rá»™ng toÃ n bá»™) ----------- */
 .new-note-container {
   padding: 12px 0; 
   margin: 0;
-  background: #101010; /* Nền tối hơn */
-  border-bottom: 1px solid #303030; /* Viền tối */
+  background: #101010; /* Ná»n tá»'i hÆ¡n */
+  border-bottom: 1px solid #303030; /* Viá»n tá»'i */
   
   display: flex;
   flex-direction: column;
@@ -89,10 +89,10 @@ h1 {
   flex-grow: 1; 
   height: 100%; 
   padding: 10px;
-  border: 1px solid #303030; /* Viền tối */
+  border: 1px solid #303030; /* Viá»n tá»'i */
   border-radius: 4px;
-  background: #1a1a1a; /* Nền textarea tối */
-  color: #f0f0f0; /* Chữ sáng */
+  background: #1a1a1a; /* Ná»n textarea tá»'i */
+  color: #f0f0f0; /* Chá»¯ sÃ¡ng */
   font-size: 13px;
   overflow: auto; 
   resize: none; 
@@ -127,8 +127,8 @@ h1 {
   display: flex;
   gap: 0;
   padding: 8px 12px 0 12px; 
-  background: #1a1a1a; /* Nền tối */
-  border-bottom: 1px solid #303030; /* Viền tối */
+  background: #1a1a1a; /* Ná»n tá»'i */
+  border-bottom: 1px solid #303030; /* Viá»n tá»'i */
   flex-shrink: 0; 
 }
 
@@ -140,7 +140,7 @@ h1 {
   border-bottom: 2px solid transparent;
   cursor: pointer;
   font-size: 13px;
-  color: #a0a0a0; /* Chữ xám nhẹ */
+  color: #a0a0a0; /* Chá»¯ xÃ¡m nháº¹ */
   font-weight: 500;
 }
 
@@ -151,14 +151,14 @@ h1 {
 
 .tab-button:hover:not(.active) {
   color: #ffffff;
-  background: #202020; /* Nền hover tối */
+  background: #202020; /* Ná»n hover tá»'i */
 }
 
 .tab-content {
   flex: 1;
   position: relative;
   overflow: hidden;
-  background: #101010; /* Nền danh sách TỐI HƠN */
+  background: #101010; /* Ná»n danh sÃ¡ch Tá»I HÆ N */
 }
 
 .tab-pane {
@@ -170,7 +170,7 @@ h1 {
   opacity: 0;
   visibility: hidden;
   overflow-y: auto;
-  /* Đã sửa: Thêm padding bên phải để trừ hao scrollbar */
+  /* ÄÃ£ sá»­a: ThÃªm padding bÃªn pháº£i Ä'á»ƒ trá»« hao scrollbar */
   padding: 0 6px 0 0; 
   box-sizing: border-box;
   /* Scrollbar Dark Mode */
@@ -190,14 +190,14 @@ ul {
   margin: 0;
 }
 
-/* ----------- DANH SÁCH GHI CHÚ (Dạng Dải Ngang - Sát Mép) ----------- */
+/* ----------- DANH SÃCH GHI CHÃš (Dáº¡ng Dáº£i Ngang - SÃ¡t MÃ©p) ----------- */
 li.note-item {
   margin-bottom: 0; 
-  /* Đã sửa: Điều chỉnh padding ngang để đường phân cách không bị scrollbar đè lên */
+  /* ÄÃ£ sá»­a: Äiá»u chá»‰nh padding ngang Ä'á»ƒ Ä'Æ°á»ng phÃ¢n cÃ¡ch khÃ´ng bá»‹ scrollbar Ä'Ã¨ lÃªn */
   padding: 12px 10px; 
-  background: #101010; /* NỀN TỐI */
+  background: #101010; /* Ná»€N Tá»I */
   border: none; 
-  /* Chiều dài của border-bottom sẽ theo chiều ngang của li, không bị tràn ra ngoài do padding của .tab-pane */
+  /* Chiá»u dÃ i cá»§a border-bottom sáº½ theo chiá»u ngang cá»§a li, khÃ´ng bá»‹ trÃ n ra ngoÃ i do padding cá»§a .tab-pane */
   border-bottom: 1px solid #303030; 
   border-radius: 0; 
   cursor: grab;
@@ -214,22 +214,22 @@ li.note-item.drag-over {
   background: none; 
 }
 
-/* Điều chỉnh Pinned: Giữ NỀN TỐI */
+/* Äiá»u chá»‰nh Pinned: Giá»¯ Ná»€N Tá»I */
 li.note-item.pinned {
   background: #101010; 
   border-left: none; 
   border-bottom: 1px solid #303030; 
 }
 
-/* ĐÃ XÓA HIỆU ỨNG HOVER */
+/* ÄÃƒ XÃ"A HIá»†U á»¨NG HOVER */
 .note-item:hover {
-  background: #101010; /* Đặt lại thành nền mặc định để hủy hover */
+  background: #101010; /* Äáº·t láº¡i thÃ nh ná»n máº·c Ä'á»‹nh Ä'á»ƒ há»§y hover */
   border-color: none;
 }
 
 li.note-item.selected-multi {
   border: none;
-  background-color: #1a354b; /* Màu chọn XANH TỐI */
+  background-color: #1a354b; /* MÃ u chá»n XANH Tá»I */
   border-left: none; 
 }
 
@@ -242,7 +242,7 @@ li.note-item.selected-multi {
 .text-content {
   margin: 0 px;
   word-wrap: break-word;
-  color: #d0d0d0; /* Chữ sáng nhẹ */
+  color: #d0d0d0; /* Chá»¯ sÃ¡ng nháº¹ */
   white-space: pre-wrap; 
 }
 
@@ -268,8 +268,8 @@ li.note-item.selected-multi {
 }
 
 .text-content code {
-  background: #1a1a1a; /* Nền code tối */
-  color: #ffb74d; /* Màu cam/vàng sáng */
+  background: #1a1a1a; /* Ná»n code tá»'i */
+  color: #ffb74d; /* MÃ u cam/vÃ ng sÃ¡ng */
   padding: 1px 4px;
   border-radius: 2px;
   font-family: 'Courier New', monospace;
@@ -278,7 +278,7 @@ li.note-item.selected-multi {
 }
 
 .text-content pre {
-  background: #101010; /* Nền pre tối */
+  background: #101010; /* Ná»n pre tá»'i */
   border: 1px solid #303030; 
   border-left: 3px solid #1890ff;
   border-radius: 4px;
@@ -315,12 +315,12 @@ li.note-item.selected-multi {
 }
 
 .text-content blockquote {
-  border-left: 3px solid #ffd54f; /* Màu vàng sáng */
+  border-left: 3px solid #ffd54f; /* MÃ u vÃ ng sÃ¡ng */
   margin: 6px 0;
   padding-left: 10px;
   color: #b0b0b0; 
   font-style: italic;
-  background-color: #1a1a1a; /* Nền blockquote tối */
+  background-color: #1a1a1a; /* Ná»n blockquote tá»'i */
   padding: 8px 10px;
   border-radius: 0 4px 4px 0;
 }
@@ -360,7 +360,7 @@ li.note-item.selected-multi {
   border: 1px solid #303030; 
 }
 
-/* THÊM: Style cho ảnh được parse từ Markdown (như badge/logo) */
+/* THÃŠM: Style cho áº£nh Ä'Æ°á»£c parse tá»« Markdown (nhÆ° badge/logo) */
 .text-content img.markdown-image {
   max-width: 100%;
   height: auto;
@@ -379,7 +379,7 @@ li.note-item.selected-multi {
   font-size: 13px;
   border: 2px solid #1890ff;
   border-radius: 4px;
-  background: #1a1a1a; /* Nền textarea tối */
+  background: #1a1a1a; /* Ná»n textarea tá»'i */
   color: #f0f0f0; 
   box-sizing: border-box;
   resize: none; 
@@ -418,7 +418,7 @@ li.note-item.selected-multi {
 }
 
 .cancel-button {
-  background-color: #303030; /* Nền nút tối */
+  background-color: #303030; /* Ná»n nÃºt tá»'i */
   color: #ffffff; 
   padding: 8px 20px;
   font-size: 13px;
@@ -435,7 +435,7 @@ li.note-item.selected-multi {
 /* ----------- CUSTOM CONTEXT MENU ----------- */
 .custom-context-menu {
   position: absolute;
-  background-color: #1a1a1a; /* Nền context menu tối */
+  background-color: #1a1a1a; /* Ná»n context menu tá»'i */
   border: 1px solid #303030; 
   border-radius: 6px;
   padding: 6px;
@@ -466,25 +466,19 @@ li.note-item.selected-multi {
 }
 
 .context-menu-icon {
-  filter: brightness(0.9) invert(1); 
   width: 16px;
   height: 16px;
   opacity: 0.8;
 }
 
-.custom-context-menu ul li:hover .context-menu-icon {
-  opacity: 1;
-  filter: none; 
-}
-
-/* ----------- MODAL XÁC NHẬN ----------- */
+/* ----------- MODAL XÃC NHáº¬N ----------- */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8); /* Nền overlay tối hơn */
+  background: rgba(0, 0, 0, 0.8); /* Ná»n overlay tá»'i hÆ¡n */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -492,7 +486,7 @@ li.note-item.selected-multi {
 }
 
 .modal-content {
-  background: #1a1a1a; /* Nền modal tối */
+  background: #1a1a1a; /* Ná»n modal tá»'i */
   border-radius: 8px;
   padding: 28px;
   max-width: 340px;
@@ -519,7 +513,7 @@ li.note-item.selected-multi {
   padding: 10px 20px;
 }
 
-/* ----------- SCROLLBAR DEEP DARK (CHỈ ẢNH HƯỞNG ĐẾN DANH SÁCH GHI CHÚ) ----------- */
+/* ----------- SCROLLBAR DEEP DARK (CHá»ˆ áº¢NH HÆ¯á»žNG Äáº¾N DANH SÃCH GHI CHÃš) ----------- */
 
 .tab-pane::-webkit-scrollbar {
   width: 6px; 
@@ -527,12 +521,12 @@ li.note-item.selected-multi {
 }
 
 .tab-pane::-webkit-scrollbar-track {
-  background: #101010; /* Nền track tối */
+  background: #101010; /* Ná»n track tá»'i */
   border-radius: 3px;
 }
 
 .tab-pane::-webkit-scrollbar-thumb {
-  background: #444444; /* Màu xám cho Win 11 style */
+  background: #444444; /* MÃ u xÃ¡m cho Win 11 style */
   border-radius: 3px; 
 }
 
@@ -540,7 +534,7 @@ li.note-item.selected-multi {
   background: #606060; 
 }
 
-/* --- CODE ẨN THANH CUỘN CHỈ TRONG KHU VỰC SOẠN THẢO (Giữ nguyên) --- */
+/* --- CODE áº¨N THANH CUá»˜N CHá»ˆ TRONG KHU Vá»°C SOáº N THáº¢O (Giá»¯ nguyÃªn) --- */
 
 .new-note-textarea::-webkit-scrollbar {
     width: 0px; 
@@ -557,10 +551,10 @@ li.note-item.selected-multi {
 .edit-textarea {
     scrollbar-width: none;
 }
-/* --- KẾT THÚC CODE ẨN THANH CUỘN --- */
+/* --- Káº¾T THÃšC CODE áº¨N THANH CUá»˜N --- */
 
 
-/* ----------- LOẠI BỎ TẤT CẢ ANIMATION ----------- */
+/* ----------- LOáº I Bá»Ž Táº¤T Cáº¢ ANIMATION ----------- */
 *, *::before, *::after {
   transition: none !important;
   animation: none !important;
