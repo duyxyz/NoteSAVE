@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const deleteMessage = document.getElementById('deleteMessage');
   const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
   const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
-  
-  const tabsContainer = document.querySelector('.tabs-container'); 
+
+  const tabsContainer = document.querySelector('.tabs-container');
 
   const exportJsonBtn = document.getElementById('exportJsonBtn');
   const importJsonBtn = document.getElementById('importJsonBtn');
@@ -38,56 +38,65 @@ document.addEventListener('DOMContentLoaded', () => {
   let clickTimer = null;
   let lastClickedIndex = null;
 
-  function parseMarkdown(text) {
-    let html = text;
+  function escapeHTML(str) {
+    const p = document.createElement('p');
+    p.textContent = str;
+    return p.innerHTML;
+  }
 
-    html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
-    html = html.replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
-    html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
-    html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
-    html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
-    html = html.replace(/^---$/gm, '<hr>');
-    html = html.replace(/^\*\*\*$/gm, '<hr>');
-    html = html.replace(/!\[([^\]]*)\]\(([^)]*)\)/g, '<img src="$2" alt="$1" class="markdown-image">');
+  // Cấu hình marked chuẩn GitHub
+  marked.setOptions({
+    gfm: true,
+    breaks: true,
+    headerIds: false,
+    mangle: false
+  });
 
-    const listRegex = /(\n*([\*\-\+]|\d+\.) [^\n]+)+/g;
-    html = html.replace(listRegex, (match) => {
-        let lines = match.trim().split('\n');
-        let isOrdered = /^\d+\./.test(lines[0].trim());
-        let listTag = isOrdered ? 'ol' : 'ul';
-        let listHtml = '';
-        
-        lines.forEach(line => {
-            let content = line.trim().replace(/^[\*\-\+] |^\d+\. /, '').trim();
-            if (content) {
-                listHtml += `<li>${content}</li>`;
-            }
-        });
+  function sanitizeHTML(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    // Loại bỏ các thẻ script và các thuộc tính sự kiện (onerror, onclick, ...)
+    const scripts = div.querySelectorAll('script');
+    scripts.forEach(s => s.remove());
 
-        return listHtml ? `\n<${listTag}>${listHtml}</${listTag}>\n` : match;
+    const allElements = div.querySelectorAll('*');
+    allElements.forEach(el => {
+      for (let i = 0; i < el.attributes.length; i++) {
+        const attr = el.attributes[i];
+        if (attr.name.startsWith('on')) {
+          el.removeAttribute(attr.name);
+        }
+        if (attr.name === 'href' && attr.value.trim().toLowerCase().startsWith('javascript:')) {
+          el.removeAttribute(attr.name);
+        }
+      }
     });
+    return div.innerHTML;
+  }
 
-    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
-    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-    html = html.replace(/_(.*?)_/g, '<em>$1</em>');
-    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
-    html = html.replace(/\n/g, '<br>');
-
-    return html;
+  function parseMarkdown(text) {
+    if (!text) return '';
+    try {
+      // Parse văn bản thô bằng marked trước để nhận diện đầy đủ cú pháp (> , | , v.v.)
+      const rawHtml = marked.parse(text);
+      // Sau đó mới dọn dẹp HTML để đảm bảo an toàn XSS
+      return sanitizeHTML(rawHtml);
+    } catch (e) {
+      console.error('Lỗi parse Markdown:', e);
+      return escapeHTML(text);
+    }
   }
 
   function applyI18n() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const msgName = el.getAttribute('data-i18n');
       const msg = chrome.i18n.getMessage(msgName);
-      if(msg) el.textContent = msg;
+      if (msg) el.textContent = msg;
     });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
       const msgName = el.getAttribute('data-i18n-placeholder');
       const msg = chrome.i18n.getMessage(msgName);
-      if(msg) el.setAttribute('placeholder', msg);
+      if (msg) el.setAttribute('placeholder', msg);
     });
     deleteMessage.textContent = chrome.i18n.getMessage('deleteConfirm');
     importChoiceModal.querySelector('p').textContent = chrome.i18n.getMessage('importChoiceTitle');
@@ -97,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function togglePin(index) {
     allNotes[index].pinned = !allNotes[index].pinned;
-    
+
     chrome.storage.local.set({ notes: allNotes }, () => {
       renderNotes(allNotes);
     });
@@ -140,6 +149,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const content = document.createElement('div');
       content.className = 'note-content';
 
+      // Thêm Header kiểu Gist cho từng ghi chú
+      const gistHeader = document.createElement('div');
+      gistHeader.className = 'gist-header';
+
+      const typeInfo = document.createElement('span');
+      typeInfo.className = 'gist-type';
+      typeInfo.textContent = note.text ? 'Snippet' : 'Image';
+
+      const timeInfo = document.createElement('span');
+      timeInfo.className = 'gist-time';
+      timeInfo.textContent = note.time || '';
+
+      gistHeader.appendChild(typeInfo);
+      gistHeader.appendChild(timeInfo);
+      li.appendChild(gistHeader);
+
       if (note.text) {
         const textDiv = document.createElement('div');
         textDiv.className = 'text-content';
@@ -155,11 +180,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       li.appendChild(content);
-      
-      li.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', (e) => {
-              e.stopPropagation(); 
-          });
+
+      li.querySelectorAll('a, summary, details, input').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
       });
 
       li.addEventListener('dragstart', (e) => {
@@ -207,8 +232,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       li.addEventListener('click', (e) => {
         if (currentEditingIndex !== null) return;
+
+        // Trình duyệt cần default behavior cho summary/details/input
+        const interactiveTags = ['A', 'SUMMARY', 'DETAILS', 'INPUT', 'LABEL'];
+        if (interactiveTags.includes(e.target.tagName) || e.target.closest('summary, details, a, input')) {
+          return;
+        }
+
         e.preventDefault();
-        
+
         if (e.ctrlKey || e.metaKey) {
           e.stopPropagation();
           if (selectedNoteIndexes.has(index)) {
@@ -284,14 +316,14 @@ document.addEventListener('DOMContentLoaded', () => {
     pinIcon.className = 'context-menu-icon';
     pinIcon.src = allNotes[index].pinned ? 'assets/unpin.png' : 'assets/pin.png';
     pinLi.appendChild(pinIcon);
-    
-    const pinTextKey = allNotes[index].pinned ? 'unpinButton' : 'pinButton'; 
+
+    const pinTextKey = allNotes[index].pinned ? 'unpinButton' : 'pinButton';
     let pinTextContent = chrome.i18n.getMessage(pinTextKey);
-    if (!pinTextContent) { 
-        pinTextContent = allNotes[index].pinned ? 'Unpin' : 'Pin';
+    if (!pinTextContent) {
+      pinTextContent = allNotes[index].pinned ? 'Unpin' : 'Pin';
     }
     const pinText = document.createTextNode(pinTextContent);
-    
+
     pinLi.appendChild(pinText);
     pinLi.addEventListener('click', () => {
       togglePin(index);
@@ -309,19 +341,10 @@ document.addEventListener('DOMContentLoaded', () => {
     deleteLi.appendChild(deleteText);
     deleteLi.addEventListener('click', () => {
       if (selectedNoteIndexes.size > 0 && selectedNoteIndexes.has(index)) {
-        const indexesToDelete = Array.from(selectedNoteIndexes).sort((a, b) => b - a);
-        indexesToDelete.forEach(idx => {
-          allNotes.splice(idx, 1);
-        });
-        selectedNoteIndexes.clear();
+        openDeleteModal(Array.from(selectedNoteIndexes));
       } else {
-        allNotes.splice(index, 1);
-        selectedNoteIndexes.clear();
+        openDeleteModal([index]);
       }
-      currentEditingIndex = null;
-      chrome.storage.local.set({ notes: allNotes }, () => {
-        renderNotes(allNotes);
-      });
       hideContextMenu();
     });
 
@@ -366,11 +389,11 @@ document.addEventListener('DOMContentLoaded', () => {
         { icon: 'assets/delete.png', text: chrome.i18n.getMessage('deleteButton'), action: 'delete' }
       ];
     } else if (selectedNoteIndexes.size === 1) {
-      
-      const pinTextKey = currentNote.pinned ? 'unpinButton' : 'pinButton'; 
+
+      const pinTextKey = currentNote.pinned ? 'unpinButton' : 'pinButton';
       let pinTextContent = chrome.i18n.getMessage(pinTextKey);
       if (!pinTextContent) {
-          pinTextContent = currentNote.pinned ? 'Unpin' : 'Pin';
+        pinTextContent = currentNote.pinned ? 'Unpin' : 'Pin';
       }
 
       menuItems = [
@@ -387,7 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
       icon.className = 'context-menu-icon';
       icon.src = item.icon;
       li.appendChild(icon);
-      const text = document.createTextNode(item.text); 
+      const text = document.createTextNode(item.text);
       li.appendChild(text);
       li.addEventListener('click', () => {
         handleContextMenuOption(item.action);
@@ -454,37 +477,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
       currentEditingIndex = indexToEdit;
       newNoteText.value = noteToEdit.text;
-      
+
       tabsContainer.style.display = 'none';
       newNoteContainer.style.display = 'flex';
       newNoteText.focus();
-      
+
       selectedNoteIndexes.clear();
       renderNotes(allNotes);
 
     } else if (option === 'delete') {
       if (selectedNoteIndexes.size > 0 && selectedNoteIndexes.has(currentContextNoteIndex)) {
-        const indexesToDelete = Array.from(selectedNoteIndexes).sort((a,b) => b - a);
-        indexesToDelete.forEach(idx => {
-          allNotes.splice(idx,1);
-        });
-        selectedNoteIndexes.clear();
-        currentEditingIndex = null;
-        chrome.storage.local.set({ notes: allNotes }, () => {
-          renderNotes(allNotes);
-        });
+        openDeleteModal(Array.from(selectedNoteIndexes));
       } else {
-        openDeleteModal(currentContextNoteIndex);
+        openDeleteModal([currentContextNoteIndex]);
       }
     }
   }
 
-  function openDeleteModal(index) {
+  function openDeleteModal(indexes) {
+    if (!Array.isArray(indexes)) indexes = [indexes];
     deleteModal.style.display = 'flex';
 
     confirmDeleteBtn.onclick = () => {
-      allNotes.splice(index, 1);
-      selectedNoteIndexes.delete(index);
+      const sortedIndexes = [...indexes].sort((a, b) => b - a);
+      sortedIndexes.forEach(idx => {
+        allNotes.splice(idx, 1);
+      });
       selectedNoteIndexes.clear();
       currentEditingIndex = null;
       chrome.storage.local.set({ notes: allNotes }, () => {
@@ -532,8 +550,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   createNoteBtn.addEventListener('click', () => {
     currentEditingIndex = null;
-    newNoteContainer.style.display = 'flex'; 
-    tabsContainer.style.display = 'none'; 
+    newNoteContainer.style.display = 'flex';
+    tabsContainer.style.display = 'none';
     newNoteText.value = '';
     newNoteText.focus();
     selectedNoteIndexes.clear();
@@ -545,13 +563,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (text) {
       if (currentEditingIndex !== null) {
         allNotes[currentEditingIndex].text = text;
-        currentEditingIndex = null; 
+        currentEditingIndex = null;
       } else {
         const now = new Date();
-        const formattedTime = now.toLocaleDateString('vi-VN') + ' [ ' + now.toLocaleTimeString('vi-VN') + ' ]';
+        const formattedTime = now.toLocaleDateString() + ' [ ' + now.toLocaleTimeString() + ' ]';
         allNotes.unshift({ text, time: formattedTime, pinned: false });
       }
-      
+
       chrome.storage.local.set({ notes: allNotes }, () => {
         renderNotes(allNotes);
         newNoteText.value = '';

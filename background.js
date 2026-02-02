@@ -2,7 +2,7 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "saveSelection",
     // Đã thay chuỗi cố định bằng lời gọi i18n
-    title: chrome.i18n.getMessage("saveSelectionContextMenu"), 
+    title: chrome.i18n.getMessage("saveSelectionContextMenu"),
     contexts: ["selection"]
   });
 
@@ -24,8 +24,8 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         chrome.storage.local.get({ notes: [] }, (data) => {
           const notes = data.notes;
           const now = new Date();
-          const date = now.toLocaleDateString('vi-VN');
-          const time = now.toLocaleTimeString('vi-VN');
+          const date = now.toLocaleDateString();
+          const time = now.toLocaleTimeString();
           const formattedTime = `${date} [ ${time} ]`;
           // Thêm ghi chú mới với trạng thái pinned: false
           notes.unshift({ text: selectedText, time: formattedTime, pinned: false });
@@ -48,8 +48,8 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
             chrome.storage.local.get({ notes: [] }, (data) => {
               const notes = data.notes;
               const now = new Date();
-              const date = now.toLocaleDateString('vi-VN');
-              const time = now.toLocaleTimeString('vi-VN');
+              const date = now.toLocaleDateString();
+              const time = now.toLocaleTimeString();
               const formattedTime = `${date} [ ${time} ]`;
               // Thêm ghi chú ảnh với trạng thái pinned: false
               notes.unshift({ image: base64data, time: formattedTime, pinned: false });

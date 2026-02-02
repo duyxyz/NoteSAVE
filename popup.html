@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="appName"></title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-  <link href="style.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
 </head>
+
 <body class="popup-body">
   <div class="header">
     <div class="button-group">
       <button class="create-note-button" id="createNoteBtn" data-i18n="createNoteButton">Tạo ghi chú</button>
       <button class="create-note-button" id="exportJsonBtn" data-i18n="exportJsonButton">Xuất JSON</button>
       <button class="create-note-button" id="importJsonBtn" data-i18n="importJsonButton">Nhập JSON</button>
-      <input accept=".json" id="fileInput" style="display: none;" type="file"/>
+      <input accept=".json" id="fileInput" style="display: none;" type="file" />
     </div>
   </div>
 
   <div class="new-note-container" id="newNoteContainer" style="display: none;">
-    <textarea class="new-note-textarea" id="newNoteText" placeholder="" data-i18n-placeholder="newNotePlaceholder"></textarea>
+    <textarea class="new-note-textarea" id="newNoteText" placeholder=""
+      data-i18n-placeholder="newNotePlaceholder"></textarea>
     <div class="edit-button-container">
       <button class="save-button" id="saveNewNoteBtn" data-i18n="saveButton">Lưu</button>
       <button class="cancel-button" id="cancelNewNoteBtn" data-i18n="cancelButton">Hủy</button>
@@ -52,15 +56,17 @@
     </div>
   </div>
   <div class="modal" id="importChoiceModal" style="display: none;">
-  <div class="modal-content">
-    <p>Bạn muốn thêm hay thay thế nội dung?</p>
-    <div class="modal-buttons">
-      <button class="save-button" id="addImportBtn">Thêm</button>
-      <button class="cancel-button" id="replaceImportBtn">Thay thế</button>
+    <div class="modal-content">
+      <p>Bạn muốn thêm hay thay thế nội dung?</p>
+      <div class="modal-buttons">
+        <button class="save-button" id="addImportBtn">Thêm</button>
+        <button class="cancel-button" id="replaceImportBtn">Thay thế</button>
+      </div>
     </div>
   </div>
-</div>
 
+  <script src="marked.min.js"></script>
   <script src="popup.js"></script>
 </body>
+
 </html>

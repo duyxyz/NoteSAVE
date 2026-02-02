@@ -7,29 +7,34 @@
   width: 380px;
   min-width: 380px;
   max-width: 380px;
-  background: #000000; /* Ná»n chÃ­nh - ÄEN SÃ‚U */
+  background: #000000;
+  /* Ná»n chÃ­nh - ÄEN SÃ‚U */
   margin: 0;
-  color: #f0f0f0; /* Chá»¯ sÃ¡ng hÆ¡n */
+  color: #f0f0f0;
+  /* Chá»¯ sÃ¡ng hÆ¡n */
   box-sizing: border-box;
-  
+
   /* Flexbox Ä'á»ƒ quáº£n lÃ½ chiá»u cao */
-  display: flex; 
-  flex-direction: column; 
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
   font-size: 18px;
   margin: 0;
-  color: #ffffff; /* Chá»¯ tráº¯ng */
+  color: #ffffff;
+  /* Chá»¯ tráº¯ng */
   font-weight: 600;
 }
 
 /* ----------- HEADER ----------- */
 .header {
   padding: 10px;
-  border-bottom: 1px solid #303030; /* Viá»n tá»'i */
-  background: #1a1a1a; /* Ná»n Header tá»'i */
-  flex-shrink: 0; 
+  border-bottom: 1px solid #303030;
+  /* Viá»n tá»'i */
+  background: #1a1a1a;
+  /* Ná»n Header tá»'i */
+  flex-shrink: 0;
 }
 
 .button-group {
@@ -40,9 +45,12 @@ h1 {
 }
 
 .create-note-button {
-  background-color: #242424; /* Ná»n nÃºt tá»'i */
-  color: #cccccc; /* Chá»¯ sÃ¡ng */
-  border: 1px solid #303030; /* Viá»n nÃºt tá»'i */
+  background-color: #242424;
+  /* Ná»n nÃºt tá»'i */
+  color: #cccccc;
+  /* Chá»¯ sÃ¡ng */
+  border: 1px solid #303030;
+  /* Viá»n nÃºt tá»'i */
   padding: 7px 8px;
   border-radius: 4px;
   cursor: pointer;
@@ -58,8 +66,9 @@ h1 {
 }
 
 #createNoteBtn.create-note-button {
-  background-color: #1a354b; /* Ná»n xanh nháº¹ tá»'i */
-  color: #91d5ff; 
+  background-color: #1a354b;
+  /* Ná»n xanh nháº¹ tá»'i */
+  color: #91d5ff;
   border-color: #1890ff;
 }
 
@@ -69,49 +78,54 @@ h1 {
 
 /* ----------- KHUNG Táº O Má»šI (Má»Ÿ rá»™ng toÃ n bá»™) ----------- */
 .new-note-container {
-  padding: 12px 0; 
+  padding: 12px 0;
   margin: 0;
-  background: #101010; /* Ná»n tá»'i hÆ¡n */
-  border-bottom: 1px solid #303030; /* Viá»n tá»'i */
-  
+  background: #101010;
+  /* Ná»n tá»'i hÆ¡n */
+  border-bottom: 1px solid #303030;
+  /* Viá»n tá»'i */
+
   display: flex;
   flex-direction: column;
-  flex-grow: 1; 
-  height: 100% !important; 
-  min-height: 550px; 
+  flex-grow: 1;
+  height: 100% !important;
+  min-height: 550px;
   box-sizing: border-box;
 }
 
 .new-note-textarea {
-  width: calc(100% - 20px); 
-  margin: 0 10px; 
-  min-height: 150px; 
-  flex-grow: 1; 
-  height: 100%; 
+  width: calc(100% - 20px);
+  margin: 0 10px;
+  min-height: 150px;
+  flex-grow: 1;
+  height: 100%;
   padding: 10px;
-  border: 1px solid #303030; /* Viá»n tá»'i */
+  border: 1px solid #303030;
+  /* Viá»n tá»'i */
   border-radius: 4px;
-  background: #1a1a1a; /* Ná»n textarea tá»'i */
-  color: #f0f0f0; /* Chá»¯ sÃ¡ng */
+  background: #1a1a1a;
+  /* Ná»n textarea tá»'i */
+  color: #f0f0f0;
+  /* Chá»¯ sÃ¡ng */
   font-size: 13px;
-  overflow: auto; 
-  resize: none; 
+  overflow: auto;
+  resize: none;
   font-family: inherit;
   box-sizing: border-box;
 }
 
 .new-note-textarea:focus {
   outline: none;
-  border-color: #1890ff; 
+  border-color: #1890ff;
 }
 
 .edit-button-container {
-  padding: 0 10px; 
+  padding: 0 10px;
   display: flex;
   justify-content: flex-end;
   gap: 8px;
   margin-top: 10px;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
 
@@ -119,17 +133,19 @@ h1 {
 .tabs-container {
   display: flex;
   flex-direction: column;
-  min-height: 550px; 
-  flex-grow: 1; 
+  min-height: 550px;
+  flex-grow: 1;
 }
 
 .tab-buttons {
   display: flex;
   gap: 0;
-  padding: 8px 12px 0 12px; 
-  background: #1a1a1a; /* Ná»n tá»'i */
-  border-bottom: 1px solid #303030; /* Viá»n tá»'i */
-  flex-shrink: 0; 
+  padding: 8px 12px 0 12px;
+  background: #1a1a1a;
+  /* Ná»n tá»'i */
+  border-bottom: 1px solid #303030;
+  /* Viá»n tá»'i */
+  flex-shrink: 0;
 }
 
 .tab-button {
@@ -140,7 +156,8 @@ h1 {
   border-bottom: 2px solid transparent;
   cursor: pointer;
   font-size: 13px;
-  color: #a0a0a0; /* Chá»¯ xÃ¡m nháº¹ */
+  color: #a0a0a0;
+  /* Chá»¯ xÃ¡m nháº¹ */
   font-weight: 500;
 }
 
@@ -151,14 +168,16 @@ h1 {
 
 .tab-button:hover:not(.active) {
   color: #ffffff;
-  background: #202020; /* Ná»n hover tá»'i */
+  background: #202020;
+  /* Ná»n hover tá»'i */
 }
 
 .tab-content {
   flex: 1;
   position: relative;
   overflow: hidden;
-  background: #101010; /* Ná»n danh sÃ¡ch Tá»I HÆ N */
+  background: #101010;
+  /* Ná»n danh sÃ¡ch Tá»I HÆ N */
 }
 
 .tab-pane {
@@ -171,11 +190,25 @@ h1 {
   visibility: hidden;
   overflow-y: auto;
   /* ÄÃ£ sá»­a: ThÃªm padding bÃªn pháº£i Ä'á»ƒ trá»« hao scrollbar */
-  padding: 0 6px 0 0; 
+  padding: 0 6px 0 0;
   box-sizing: border-box;
   /* Scrollbar Dark Mode */
-  scrollbar-width: thin; 
-  scrollbar-color: #444444 #101010; 
+  scrollbar-width: thin;
+  scrollbar-color: #444444 #101010;
+}
+
+/* Modern scrollbar for older Chrome compatibility */
+.tab-pane::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tab-pane::-webkit-scrollbar-thumb {
+  background-color: #444444;
+  border-radius: 10px;
+}
+
+.tab-pane::-webkit-scrollbar-track {
+  background-color: #101010;
 }
 
 .tab-pane.active {
@@ -192,121 +225,189 @@ ul {
 
 /* ----------- DANH SÃCH GHI CHÃš (Dáº¡ng Dáº£i Ngang - SÃ¡t MÃ©p) ----------- */
 li.note-item {
-  margin-bottom: 0; 
-  /* ÄÃ£ sá»­a: Äiá»u chá»‰nh padding ngang Ä'á»ƒ Ä'Æ°á»ng phÃ¢n cÃ¡ch khÃ´ng bá»‹ scrollbar Ä'Ã¨ lÃªn */
-  padding: 12px 10px; 
-  background: #101010; /* Ná»€N Tá»I */
-  border: none; 
-  /* Chiá»u dÃ i cá»§a border-bottom sáº½ theo chiá»u ngang cá»§a li, khÃ´ng bá»‹ trÃ n ra ngoÃ i do padding cá»§a .tab-pane */
-  border-bottom: 1px solid #303030; 
-  border-radius: 0; 
+  margin: 16px 12px;
+  background: #0d1117;
+  /* GitHub Dark default bg */
+  border: 1px solid #30363d;
+  border-radius: 6px;
   cursor: grab;
   position: relative;
-  transition: none;
+  overflow: hidden;
+  /* Để bo góc header */
+  transition: border-color 0.2s, box-shadow 0.2s !important;
 }
+
+.gist-header {
+  background-color: #161b22;
+  border-bottom: 1px solid #30363d;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gist-type {
+  font-size: 11px;
+  font-weight: 600;
+  color: #539bf5;
+  text-transform: uppercase;
+}
+
+.gist-time {
+  font-size: 11px;
+  color: #768390;
+}
+
 
 li.note-item.dragging {
   cursor: grabbing;
 }
 
 li.note-item.drag-over {
-  border: none; 
-  background: none; 
+  border: none;
+  background: none;
 }
 
 /* Äiá»u chá»‰nh Pinned: Giá»¯ Ná»€N Tá»I */
 li.note-item.pinned {
-  background: #101010; 
-  border-left: none; 
-  border-bottom: 1px solid #303030; 
+  background: #101010;
+  border-left: none;
+  border-bottom: 1px solid #303030;
 }
 
-/* ÄÃƒ XÃ"A HIá»†U á»¨NG HOVER */
-.note-item:hover {
-  background: #101010; /* Äáº·t láº¡i thÃ nh ná»n máº·c Ä'á»‹nh Ä'á»ƒ há»§y hover */
-  border-color: none;
-}
 
 li.note-item.selected-multi {
   border: none;
-  background-color: #1a354b; /* MÃ u chá»n XANH Tá»I */
-  border-left: none; 
+  background-color: #1a354b;
+  /* MÃ u chá»n XANH Tá»I */
+  border-left: none;
 }
 
 .note-content {
+  padding: 16px;
   font-size: 13px;
-  color: #f0f0f0; 
+  color: #adbac7;
+  /* Màu chữ chuẩn GitHub Dark */
   line-height: 1.5;
 }
 
 .text-content {
-  margin: 0 px;
+  margin: 0;
   word-wrap: break-word;
-  color: #d0d0d0; /* Chá»¯ sÃ¡ng nháº¹ */
-  white-space: pre-wrap; 
+  color: #d0d0d0;
 }
 
-/* ----------- MARKDOWN STYLES (Deep Dark Mode) ----------- */
-.text-content h1, .text-content h2, .text-content h3 {
-  color: #ffffff; 
-  margin: 8px 0 6px 0;
+/* ----------- MARKDOWN STYLES (GitHub Dark Style) ----------- */
+.text-content {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.text-content h1,
+.text-content h2,
+.text-content h3,
+.text-content h4 {
+  color: #adbac7;
+  margin-top: 24px;
+  margin-bottom: 16px;
   font-weight: 600;
+  line-height: 1.25;
 }
 
-.text-content h1 { font-size: 16px; border-bottom: 1px solid #303030; padding-bottom: 3px; }
-.text-content h2 { font-size: 14px; }
-.text-content h3 { font-size: 13px; }
+.text-content h1 {
+  font-size: 1.5em;
+  border-bottom: 1px solid #373e47;
+  padding-bottom: .3em;
+}
+
+.text-content h2 {
+  font-size: 1.25em;
+  border-bottom: 1px solid #373e47;
+  padding-bottom: .3em;
+}
+
+.text-content h3 {
+  font-size: 1em;
+}
+
+.text-content h1:first-child,
+.text-content h2:first-child,
+.text-content h3:first-child {
+  margin-top: 0;
+}
 
 .text-content strong {
   font-weight: 600;
-  color: #ffffff; 
+  color: #adbac7;
 }
 
 .text-content em {
   font-style: italic;
-  color: #b0b0b0; 
+  color: #adbac7;
 }
 
 .text-content code {
-  background: #1a1a1a; /* Ná»n code tá»'i */
-  color: #ffb74d; /* MÃ u cam/vÃ ng sÃ¡ng */
-  padding: 1px 4px;
-  border-radius: 2px;
-  font-family: 'Courier New', monospace;
-  font-size: 11px;
-  border: 1px solid #303030; 
+  background: rgba(99, 110, 123, 0.4);
+  color: #adbac7;
+  padding: .2em .4em;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font-size: 85%;
+  margin: 0;
 }
 
 .text-content pre {
-  background: #101010; /* Ná»n pre tá»'i */
-  border: 1px solid #303030; 
-  border-left: 3px solid #1890ff;
-  border-radius: 4px;
-  padding: 8px;
-  overflow-x: auto;
-  margin: 6px 0;
+  background: #22272e;
+  border-radius: 6px;
+  padding: 16px;
+  overflow: auto;
+  margin: 16px 0;
+  line-height: 1.45;
 }
 
 .text-content pre code {
-  background: none;
-  border: none;
+  background: transparent;
   padding: 0;
+  font-size: 100%;
   display: block;
-  line-height: 1.4;
+  word-break: normal;
+  white-space: pre;
+  color: #adbac7;
 }
 
-.text-content ul, .text-content ol {
-  margin: 6px 0;
-  padding-left: 20px;
+.text-content ul,
+.text-content ol {
+  margin-top: 0;
+  margin-bottom: 16px;
+  padding-left: 2em;
 }
 
 .text-content li {
-  margin: 3px 0;
-  color: #d0d0d0; 
+  margin: .25em 0;
+  color: #adbac7;
+}
+
+.text-content p {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.text-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* GitHub Task List Style */
+.task-list-item {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.task-list-item input {
+  margin: 0 .2em .25em -1.6em;
+  vertical-align: middle;
 }
 
 .text-content a {
-  color: #91d5ff; 
+  color: #539bf5;
   text-decoration: none;
 }
 
@@ -315,39 +416,45 @@ li.note-item.selected-multi {
 }
 
 .text-content blockquote {
-  border-left: 3px solid #ffd54f; /* MÃ u vÃ ng sÃ¡ng */
-  margin: 6px 0;
-  padding-left: 10px;
-  color: #b0b0b0; 
-  font-style: italic;
-  background-color: #1a1a1a; /* Ná»n blockquote tá»'i */
-  padding: 8px 10px;
-  border-radius: 0 4px 4px 0;
+  padding: 0 1em;
+  color: #768390;
+  border-left: .25em solid #373e47;
+  margin: 0 0 16px 0;
 }
 
 .text-content hr {
-  border: none;
-  border-top: 1px solid #303030; 
-  margin: 8px 0;
+  height: .25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #373e47;
+  border: 0;
 }
 
 .text-content table {
+  border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
-  margin: 6px 0;
-  font-size: 12px;
+  margin: 16px 0;
+  display: block;
+  overflow: auto;
 }
 
 .text-content table th,
 .text-content table td {
-  border: 1px solid #303030; 
-  padding: 4px;
-  text-align: left;
+  border: 1px solid #373e47;
+  padding: 6px 13px;
+}
+
+.text-content table tr {
+  background-color: #22272e;
+  border-top: 1px solid #373e47;
+}
+
+.text-content table tr:nth-child(2n) {
+  background-color: #1c2128;
 }
 
 .text-content table th {
-  background: #1a1a1a; 
-  color: #ffffff; 
   font-weight: 600;
 }
 
@@ -357,7 +464,7 @@ li.note-item.selected-multi {
   margin-top: 10px;
   border-radius: 4px;
   display: block;
-  border: 1px solid #303030; 
+  border: 1px solid #303030;
 }
 
 /* THÃŠM: Style cho áº£nh Ä'Æ°á»£c parse tá»« Markdown (nhÆ° badge/logo) */
@@ -365,25 +472,26 @@ li.note-item.selected-multi {
   max-width: 100%;
   height: auto;
   border-radius: 4px;
-  display: inline-block; 
-  margin: 2px 4px 2px 0; 
+  display: inline-block;
+  margin: 2px 4px 2px 0;
   vertical-align: middle;
-  border: none; 
+  border: none;
 }
 
 .edit-textarea {
   width: 100%;
-  min-height: 120px; 
-  flex-grow: 1; 
+  min-height: 120px;
+  flex-grow: 1;
   padding: 10px;
   font-size: 13px;
   border: 2px solid #1890ff;
   border-radius: 4px;
-  background: #1a1a1a; /* Ná»n textarea tá»'i */
-  color: #f0f0f0; 
+  background: #1a1a1a;
+  /* Ná»n textarea tá»'i */
+  color: #f0f0f0;
   box-sizing: border-box;
-  resize: none; 
-  overflow: auto; 
+  resize: none;
+  overflow: auto;
   font-family: inherit;
   line-height: 1.5;
 }
@@ -394,16 +502,16 @@ li.note-item.selected-multi {
 }
 
 .edit-button-container {
-  padding: 0 10px; 
+  padding: 0 10px;
   display: flex;
   justify-content: flex-end;
   gap: 8px;
   margin-top: 10px;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
 .save-button {
-  background-color: #1890ff; 
+  background-color: #1890ff;
   color: #ffffff;
   padding: 8px 20px;
   font-size: 13px;
@@ -418,8 +526,9 @@ li.note-item.selected-multi {
 }
 
 .cancel-button {
-  background-color: #303030; /* Ná»n nÃºt tá»'i */
-  color: #ffffff; 
+  background-color: #303030;
+  /* Ná»n nÃºt tá»'i */
+  color: #ffffff;
   padding: 8px 20px;
   font-size: 13px;
   border-radius: 4px;
@@ -435,8 +544,9 @@ li.note-item.selected-multi {
 /* ----------- CUSTOM CONTEXT MENU ----------- */
 .custom-context-menu {
   position: absolute;
-  background-color: #1a1a1a; /* Ná»n context menu tá»'i */
-  border: 1px solid #303030; 
+  background-color: #1a1a1a;
+  /* Ná»n context menu tá»'i */
+  border: 1px solid #303030;
   border-radius: 6px;
   padding: 6px;
   min-width: 150px;
@@ -453,7 +563,7 @@ li.note-item.selected-multi {
 .custom-context-menu ul li {
   padding: 8px 12px;
   cursor: pointer;
-  color: #e0e0e0; 
+  color: #e0e0e0;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -478,7 +588,8 @@ li.note-item.selected-multi {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8); /* Ná»n overlay tá»'i hÆ¡n */
+  background: rgba(0, 0, 0, 0.8);
+  /* Ná»n overlay tá»'i hÆ¡n */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -486,18 +597,19 @@ li.note-item.selected-multi {
 }
 
 .modal-content {
-  background: #1a1a1a; /* Ná»n modal tá»'i */
+  background: #1a1a1a;
+  /* Ná»n modal tá»'i */
   border-radius: 8px;
   padding: 28px;
   max-width: 340px;
   text-align: center;
-  border: 1px solid #303030; 
+  border: 1px solid #303030;
 }
 
 .modal-content p {
   margin: 0 0 24px 0;
   font-size: 15px;
-  color: #f0f0f0; 
+  color: #f0f0f0;
   line-height: 1.5;
 }
 
@@ -516,46 +628,53 @@ li.note-item.selected-multi {
 /* ----------- SCROLLBAR DEEP DARK (CHá»ˆ áº¢NH HÆ¯á»žNG Äáº¾N DANH SÃCH GHI CHÃš) ----------- */
 
 .tab-pane::-webkit-scrollbar {
-  width: 6px; 
-  height: 6px; 
+  width: 6px;
+  height: 6px;
 }
 
 .tab-pane::-webkit-scrollbar-track {
-  background: #101010; /* Ná»n track tá»'i */
+  background: #101010;
+  /* Ná»n track tá»'i */
   border-radius: 3px;
 }
 
 .tab-pane::-webkit-scrollbar-thumb {
-  background: #444444; /* MÃ u xÃ¡m cho Win 11 style */
-  border-radius: 3px; 
+  background: #444444;
+  /* MÃ u xÃ¡m cho Win 11 style */
+  border-radius: 3px;
 }
 
 .tab-pane::-webkit-scrollbar-thumb:hover {
-  background: #606060; 
+  background: #606060;
 }
 
 /* --- CODE áº¨N THANH CUá»˜N CHá»ˆ TRONG KHU Vá»°C SOáº N THáº¢O (Giá»¯ nguyÃªn) --- */
 
 .new-note-textarea::-webkit-scrollbar {
-    width: 0px; 
-    background: transparent;
+  width: 0px;
+  background: transparent;
 }
+
 .new-note-textarea {
-    scrollbar-width: none;
+  scrollbar-width: none;
 }
 
 .edit-textarea::-webkit-scrollbar {
-    width: 0px; 
-    background: transparent;
+  width: 0px;
+  background: transparent;
 }
+
 .edit-textarea {
-    scrollbar-width: none;
+  scrollbar-width: none;
 }
+
 /* --- Káº¾T THÃšC CODE áº¨N THANH CUá»˜N --- */
 
 
 /* ----------- LOáº I Bá»Ž Táº¤T Cáº¢ ANIMATION ----------- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   transition: none !important;
   animation: none !important;
 }
