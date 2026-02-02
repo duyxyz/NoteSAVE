@@ -1,20 +1,26 @@
-/* file: style.css - DEEP DARK / AMOLED MODE (ÄÃƒ FIX SCROLLBAR) */
+:root {
+  --github-bg-default: #0d1117;
+  --github-bg-subtle: #151b23;
+  --github-bg-canvas: #010409;
+  --github-header-bg: #151b22;
+  --github-border-default: #30363d;
+  --github-text-default: #adbac7;
+  --github-accent: #539bf5;
+}
 
-/* ----------- Tá»"NG THá»‚ POPUP - DEEP DARK MODE ----------- */
+/* ----------- TỔNG THỂ POPUP - DEEP DARK MODE ----------- */
 .popup-body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   padding: 0;
   width: 380px;
   min-width: 380px;
   max-width: 380px;
-  background: #000000;
-  /* Ná»n chÃ­nh - ÄEN SÃ‚U */
+  background: var(--github-bg-canvas);
   margin: 0;
-  color: #f0f0f0;
-  /* Chá»¯ sÃ¡ng hÆ¡n */
+  color: var(--github-text-default);
   box-sizing: border-box;
 
-  /* Flexbox Ä'á»ƒ quáº£n lÃ½ chiá»u cao */
+  /* Flexbox để quản lý chiều cao */
   display: flex;
   flex-direction: column;
 }
@@ -30,10 +36,8 @@ h1 {
 /* ----------- HEADER ----------- */
 .header {
   padding: 10px;
-  border-bottom: 1px solid #303030;
-  /* Viá»n tá»'i */
-  background: #1a1a1a;
-  /* Ná»n Header tá»'i */
+  border-bottom: 1px solid var(--github-border-default);
+  background: var(--github-header-bg);
   flex-shrink: 0;
 }
 
@@ -59,11 +63,7 @@ h1 {
   text-align: center;
 }
 
-.create-note-button:hover {
-  background-color: #333333;
-  border-color: #444444;
-  color: #ffffff;
-}
+/* Removed hover */
 
 #createNoteBtn.create-note-button {
   background-color: #1a354b;
@@ -72,18 +72,14 @@ h1 {
   border-color: #1890ff;
 }
 
-#createNoteBtn.create-note-button:hover {
-  background-color: #204768;
-}
+/* Removed hover */
 
-/* ----------- KHUNG Táº O Má»šI (Má»Ÿ rá»™ng toÃ n bá»™) ----------- */
+/* ----------- KHUNG TẠO MỚI (Mở rộng toàn bộ) ----------- */
 .new-note-container {
   padding: 12px 0;
   margin: 0;
-  background: #101010;
-  /* Ná»n tá»'i hÆ¡n */
-  border-bottom: 1px solid #303030;
-  /* Viá»n tá»'i */
+  background: var(--github-bg-canvas);
+  border-bottom: 1px solid var(--github-border-default);
 
   display: flex;
   flex-direction: column;
@@ -141,10 +137,8 @@ h1 {
   display: flex;
   gap: 0;
   padding: 8px 12px 0 12px;
-  background: #1a1a1a;
-  /* Ná»n tá»'i */
-  border-bottom: 1px solid #303030;
-  /* Viá»n tá»'i */
+  background: var(--github-header-bg);
+  border-bottom: 1px solid var(--github-border-default);
   flex-shrink: 0;
 }
 
@@ -166,18 +160,13 @@ h1 {
   border-bottom-color: #1890ff;
 }
 
-.tab-button:hover:not(.active) {
-  color: #ffffff;
-  background: #202020;
-  /* Ná»n hover tá»'i */
-}
+/* Removed hover */
 
 .tab-content {
   flex: 1;
   position: relative;
   overflow: hidden;
-  background: #101010;
-  /* Ná»n danh sÃ¡ch Tá»I HÆ N */
+  background: var(--github-bg-canvas);
 }
 
 .tab-pane {
@@ -226,9 +215,8 @@ ul {
 /* ----------- DANH SÃCH GHI CHÃš (Dáº¡ng Dáº£i Ngang - SÃ¡t MÃ©p) ----------- */
 li.note-item {
   margin: 16px 12px;
-  background: #0d1117;
-  /* GitHub Dark default bg */
-  border: 1px solid #30363d;
+  background: var(--github-bg-default);
+  border: 1px solid var(--github-border-default);
   border-radius: 6px;
   cursor: grab;
   position: relative;
@@ -238,8 +226,8 @@ li.note-item {
 }
 
 .gist-header {
-  background-color: #161b22;
-  border-bottom: 1px solid #30363d;
+  background-color: var(--github-bg-subtle);
+  border-bottom: 1px solid var(--github-border-default);
   padding: 8px 16px;
   display: flex;
   justify-content: space-between;
@@ -359,9 +347,12 @@ li.note-item.selected-multi {
   background: #22272e;
   border-radius: 6px;
   padding: 16px;
-  overflow: auto;
+  overflow-x: auto;
   margin: 16px 0;
   line-height: 1.45;
+  /* Thêm để tránh bị khuất code quá dài */
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .text-content pre code {
@@ -370,7 +361,7 @@ li.note-item.selected-multi {
   font-size: 100%;
   display: block;
   word-break: normal;
-  white-space: pre;
+  white-space: pre-wrap;
   color: #adbac7;
 }
 
@@ -411,9 +402,7 @@ li.note-item.selected-multi {
   text-decoration: none;
 }
 
-.text-content a:hover {
-  text-decoration: underline;
-}
+/* Removed hover */
 
 .text-content blockquote {
   padding: 0 1em;
@@ -421,6 +410,60 @@ li.note-item.selected-multi {
   border-left: .25em solid #373e47;
   margin: 0 0 16px 0;
 }
+
+/* GitHub Alerts / Admonitions */
+.markdown-alert {
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid var(--alert-color);
+  background-color: var(--alert-bg);
+  border-radius: 0 6px 6px 0;
+}
+
+.markdown-alert-title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: var(--alert-color);
+  text-transform: capitalize;
+}
+
+.markdown-alert-title i {
+  margin-right: 8px;
+}
+
+.markdown-alert p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-alert-note {
+  --alert-color: #539bf5;
+  --alert-bg: rgba(65, 132, 228, 0.1);
+}
+
+.markdown-alert-tip {
+  --alert-color: #57ab5a;
+  --alert-bg: rgba(46, 160, 67, 0.1);
+}
+
+.markdown-alert-important {
+  --alert-color: #986ee2;
+  --alert-bg: rgba(137, 87, 229, 0.1);
+}
+
+.markdown-alert-warning {
+  --alert-color: #c69026;
+  --alert-bg: rgba(174, 124, 20, 0.1);
+}
+
+.markdown-alert-caution {
+  --alert-color: #e5534b;
+  --alert-bg: rgba(248, 81, 73, 0.1);
+}
+
 
 .text-content hr {
   height: .25em;
@@ -467,14 +510,13 @@ li.note-item.selected-multi {
   border: 1px solid #303030;
 }
 
-/* THÃŠM: Style cho áº£nh Ä'Æ°á»£c parse tá»« Markdown (nhÆ° badge/logo) */
-.text-content img.markdown-image {
+/* Đảm bảo ảnh trong Markdown không bị tràn khỏi popup */
+.text-content img {
   max-width: 100%;
   height: auto;
   border-radius: 4px;
-  display: inline-block;
-  margin: 2px 4px 2px 0;
-  vertical-align: middle;
+  display: block;
+  margin: 8px 0;
   border: none;
 }
 
@@ -521,9 +563,7 @@ li.note-item.selected-multi {
   font-weight: 500;
 }
 
-.save-button:hover {
-  background-color: #40a9ff;
-}
+/* Removed hover */
 
 .cancel-button {
   background-color: #303030;
@@ -537,9 +577,7 @@ li.note-item.selected-multi {
   font-weight: 500;
 }
 
-.cancel-button:hover {
-  background-color: #444444;
-}
+/* Removed hover */
 
 /* ----------- CUSTOM CONTEXT MENU ----------- */
 .custom-context-menu {
@@ -570,10 +608,7 @@ li.note-item.selected-multi {
   gap: 10px;
 }
 
-.custom-context-menu ul li:hover {
-  background-color: #1890ff;
-  color: white;
-}
+/* Removed hover */
 
 .context-menu-icon {
   width: 16px;
@@ -644,9 +679,7 @@ li.note-item.selected-multi {
   border-radius: 3px;
 }
 
-.tab-pane::-webkit-scrollbar-thumb:hover {
-  background: #606060;
-}
+/* Removed hover */
 
 /* --- CODE áº¨N THANH CUá»˜N CHá»ˆ TRONG KHU Vá»°C SOáº N THáº¢O (Giá»¯ nguyÃªn) --- */
 

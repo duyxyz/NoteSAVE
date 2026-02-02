@@ -78,7 +78,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!text) return '';
     try {
       // Parse văn bản thô bằng marked trước để nhận diện đầy đủ cú pháp (> , | , v.v.)
-      const rawHtml = marked.parse(text);
+      let rawHtml = marked.parse(text);
+
+      // Xử lý GitHub Alerts ([!NOTE], [!TIP], etc.) trong blockquote
+      const alertMap = {
+        'NOTE': 'fa-info-circle',
+        'TIP': 'fa-lightbulb',
+        'IMPORTANT': 'fa-circle-exclamation',
+        'WARNING': 'fa-triangle-exclamation',
+        'CAUTION': 'fa-circle-stop'
+      };
+
+      Object.keys(alertMap).forEach(type => {
+        // Regex linh hoạt hơn để bắt toàn bộ nội dung trong blockquote có [!TYPE]
+        const regex = new RegExp(`<blockquote>\\s*<p>\\s*\\[!${type}\\](?:<br>|\\s)*([\\s\\S]*?)<\\/blockquote>`, 'gi');
+        rawHtml = rawHtml.replace(regex, (match, content) => {
+          const typeLower = type.toLowerCase();
+          const icon = alertMap[type];
+          return `<div class="markdown-alert markdown-alert-${typeLower}"><p class="markdown-alert-title"><i class="fas ${icon}"></i>${typeLower}</p>${content.trim()}</div>`;
+        });
+      });
+
       // Sau đó mới dọn dẹp HTML để đảm bảo an toàn XSS
       return sanitizeHTML(rawHtml);
     } catch (e) {
