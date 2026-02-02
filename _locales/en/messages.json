@@ -90,5 +90,9 @@
   "unpinButton": {
     "message": "Unpin",
     "description": "Context menu option to unpin a note"
+  },
+  "fullViewButton": {
+    "message": "Full View",
+    "description": "Context menu option to view note in a full page"
   }
 }

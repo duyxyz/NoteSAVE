@@ -90,5 +90,9 @@
   "unpinButton": {
     "message": "Bỏ ghim",
     "description": "Tùy chọn menu ngữ cảnh để bỏ ghim ghi chú"
+  },
+  "fullViewButton": {
+    "message": "Xem đầy đủ",
+    "description": "Tùy chọn menu ngữ cảnh để xem ghi chú trang riêng"
   }
 }

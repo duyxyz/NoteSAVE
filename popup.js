@@ -154,6 +154,16 @@ document.addEventListener('DOMContentLoaded', () => {
     textNoteList.innerHTML = '';
     imageNoteList.innerHTML = '';
 
+    // Tạo 2 cột để phân phối ảnh (Masonry ổn định)
+    const leftCol = document.createElement('div');
+    leftCol.className = 'masonry-column';
+    const rightCol = document.createElement('div');
+    rightCol.className = 'masonry-column';
+
+    imageNoteList.appendChild(leftCol);
+    imageNoteList.appendChild(rightCol);
+
+    let imageCount = 0;
     allNotes.forEach((note, index) => {
       const li = document.createElement('li');
       li.classList.add('note-item');
@@ -196,7 +206,14 @@ document.addEventListener('DOMContentLoaded', () => {
         img.src = note.image;
         img.className = 'note-image';
         content.appendChild(img);
-        imageNoteList.appendChild(li);
+
+        // Phân phối xen kẽ vào 2 cột
+        if (imageCount % 2 === 0) {
+          leftCol.appendChild(li);
+        } else {
+          rightCol.appendChild(li);
+        }
+        imageCount++;
       }
 
       li.appendChild(content);
@@ -271,9 +288,6 @@ document.addEventListener('DOMContentLoaded', () => {
             li.classList.add('selected-multi');
           }
           hideContextMenu();
-          clickCount = 0;
-          lastClickedIndex = null;
-          if (clickTimer) clearTimeout(clickTimer);
         } else {
           if (lastClickedIndex === index) {
             clickCount++;
@@ -315,8 +329,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!selectedNoteIndexes.has(index)) {
           selectedNoteIndexes.clear();
+          // Chỉ cập nhật class UI, không gọi renderNotes để tránh nhảy Masonry
+          document.querySelectorAll('.note-item').forEach(item => item.classList.remove('selected-multi'));
           selectedNoteIndexes.add(index);
-          renderNotes(allNotes);
+          li.classList.add('selected-multi');
         }
 
         if (note.image) {
@@ -390,9 +406,23 @@ document.addEventListener('DOMContentLoaded', () => {
       hideContextMenu();
     });
 
+    const fullViewLi = document.createElement('li');
+    const fullViewIcon = document.createElement('img');
+    fullViewIcon.className = 'context-menu-icon';
+    fullViewIcon.src = 'assets/fullviews.png';
+    fullViewLi.appendChild(fullViewIcon);
+    const fullViewText = document.createTextNode(chrome.i18n.getMessage('fullViewButton'));
+    fullViewLi.appendChild(fullViewText);
+    fullViewLi.addEventListener('click', () => {
+      const noteTime = allNotes[index].time;
+      window.open(`fullview.html?time=${encodeURIComponent(noteTime)}`, '_blank');
+      hideContextMenu();
+    });
+
     contextMenuList.appendChild(pinLi);
     contextMenuList.appendChild(deleteLi);
     contextMenuList.appendChild(saveLi);
+    contextMenuList.appendChild(fullViewLi);
 
     positionContextMenu(x, y);
   }
@@ -420,6 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { icon: currentNote.pinned ? 'assets/unpin.png' : 'assets/pin.png', text: pinTextContent, action: 'pin' },
         { icon: 'assets/copy.png', text: chrome.i18n.getMessage('copyButton'), action: 'copy' },
         { icon: 'assets/edit.png', text: chrome.i18n.getMessage('editButton'), action: 'edit' },
+        { icon: 'assets/fullviews.png', text: chrome.i18n.getMessage('fullViewButton'), action: 'fullview' },
         { icon: 'assets/delete.png', text: chrome.i18n.getMessage('deleteButton'), action: 'delete' }
       ];
     }
@@ -505,6 +536,9 @@ document.addEventListener('DOMContentLoaded', () => {
       selectedNoteIndexes.clear();
       renderNotes(allNotes);
 
+    } else if (option === 'fullview') {
+      const noteTime = allNotes[currentContextNoteIndex].time;
+      window.open(`fullview.html?time=${encodeURIComponent(noteTime)}`, '_blank');
     } else if (option === 'delete') {
       if (selectedNoteIndexes.size > 0 && selectedNoteIndexes.has(currentContextNoteIndex)) {
         openDeleteModal(Array.from(selectedNoteIndexes));

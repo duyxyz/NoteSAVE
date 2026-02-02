@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full View - NoteSAVE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        body {
+            background: var(--github-bg-canvas);
+            color: var(--github-text-default);
+            margin: 0;
+            display: block;
+            width: 100%;
+            min-width: 100%;
+            max-width: 100%;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .full-view-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+
+        .full-view-card {
+            background: var(--github-bg-default);
+            border: 1px solid var(--github-border-default);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .full-view-header {
+            background: var(--github-bg-subtle);
+            border-bottom: 1px solid var(--github-border-default);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .full-view-content {
+            padding: 30px;
+        }
+
+        .back-button {
+            background: var(--github-header-bg);
+            border: 1px solid var(--github-border-default);
+            color: var(--github-text-default);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="full-view-container">
+        <div style="margin-bottom: 20px;">
+            <a href="#" id="backBtn" class="back-button">
+                <i class="fas fa-arrow-left"></i> Close
+            </a>
+        </div>
+        <div class="full-view-card">
+            <div class="full-view-header">
+                <span id="noteType" class="gist-type"></span>
+                <span id="noteTime" class="gist-time"></span>
+            </div>
+            <div id="noteContent" class="full-view-content text-content">
+                <!-- Content gets injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="marked.min.js"></script>
+    <script src="fullview.js"></script>
+</body>
+
+</html>
